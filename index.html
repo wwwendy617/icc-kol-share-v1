@@ -2453,6 +2453,234 @@
     from { opacity: 0; transform: translateY(20px) scale(0.97); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
+
+  /* ═════════════════════════════════════════════════════════════ */
+  /* 响应式 · 投屏 + 平板 + 手机                                    */
+  /* ═════════════════════════════════════════════════════════════ */
+
+  /* 老式投屏比例 */
+  @media (max-aspect-ratio: 4/3) and (min-width: 1025px) {
+    .slide { padding: 6vh 6vw; }
+  }
+
+  /* ───── 平板及以下（≤1024px）：6/4 列 → 3/2 列收紧 ───── */
+  @media (max-width: 1024px) {
+    .ecosystem-grid { grid-template-columns: repeat(3, 1fr); }
+    .ecosystem-grid .ecosystem-cell:nth-child(3) { border-right: none; }
+    .ecosystem-grid .ecosystem-cell:nth-child(4),
+    .ecosystem-grid .ecosystem-cell:nth-child(5),
+    .ecosystem-grid .ecosystem-cell:nth-child(6) { border-top: 1px solid var(--line); }
+    .cases-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5vh 1.5vw; }
+    .overview-grid { grid-template-columns: repeat(2, 1fr); }
+    .overview-grid .overview-col:nth-child(2) { border-right: none; }
+    .overview-grid .overview-col:nth-child(3),
+    .overview-grid .overview-col:nth-child(4) { border-top: 1px solid var(--line); }
+    .evolve-speeds-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ───── 手机（≤768px）：长卷轴模式 + 全部单列 ───── */
+  @media (max-width: 768px) {
+    /* 关闭 scroll-snap，改为长卷轴体验 */
+    .deck { scroll-snap-type: none; overflow-y: auto; }
+    .slide {
+      height: auto;
+      min-height: 100vh;
+      padding: 12vh 6vw 8vh;
+      scroll-snap-align: none;
+    }
+
+    /* 顶部 nav */
+    .top-nav { padding: 0 4vw; top: 2.5vh; }
+    .brand { font-size: 12px; }
+    .topic-pill { display: none; }
+
+    /* TOC 按钮：移到右上角 */
+    .toc-trigger {
+      top: 2.6vh;
+      left: auto;
+      right: 4vw;
+      opacity: 0.7;
+    }
+
+    /* 底部 bar */
+    .bottom-bar { font-size: 10px; padding: 0 4vw; bottom: 2vh; }
+
+    /* TOC 浮层 */
+    .toc-panel { padding: 3vh 5vw; max-height: 92vh; }
+    .toc-section-name { font-size: 10px; }
+    .toc-item-title { font-size: 13px; }
+
+    /* === 楔子 === */
+    .slide-1 .hero { font-size: clamp(72px, 18vw, 110px); margin-bottom: 3vh; }
+    .slide-1 .compare-row {
+      grid-template-columns: 1fr;
+      gap: 4px;
+      text-align: center;
+    }
+    .slide-1 .compare-row .label-l { text-align: center; }
+    .slide-1 .compare-row .label-r { text-align: center; }
+    .slide-1 .compare-row .arrow-mid { transform: rotate(90deg); margin: 4px auto; }
+    .slide-1 .timeline-strip { font-size: 14px; }
+    .slide-1 .halftone-blob { display: none; }
+
+    /* === 第一幕 === */
+    .slide-2 .container { grid-template-columns: 1fr; gap: 4vh; }
+    .slide-2 .lead { font-size: clamp(32px, 7.5vw, 48px); }
+    .slide-2 .timeline-list::before { left: 100px; }
+    .slide-2 .era-row { grid-template-columns: 90px 24px 1fr; gap: 8px; }
+    .slide-2 .era-row .era { font-size: 12px; }
+    .slide-2 .era-row .actors { font-size: 13px; }
+
+    /* === 第二幕 finding === */
+    .finding-title { font-size: clamp(32px, 7vw, 52px); line-height: 1.1; }
+    .finding-subtitle { font-size: 14px; }
+
+    .finding-compare { grid-template-columns: 1fr; }
+    .compare-side { padding: 2.5vh 5vw; }
+    .compare-side.from { border-bottom: 1px solid var(--line); }
+    .compare-arrow-mid {
+      border-left: none;
+      border-right: none;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 1vh 0;
+      transform: rotate(90deg);
+    }
+
+    .iceberg-above { width: 90%; }
+    .iceberg-below { width: 100%; padding: 2vh 4vw; }
+    .iceberg-below .ice-grid { grid-template-columns: 1fr; gap: 1.2vh; }
+
+    .pull-container {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 2vh;
+    }
+    .pull-dept.dept-mkt,
+    .pull-dept.dept-sales,
+    .pull-dept.dept-brand,
+    .pull-center { grid-column: 1; grid-row: auto; }
+    .pull-brief { width: 100%; height: auto; padding: 2vh 5vw; }
+    .pull-brief .brief-name { font-size: clamp(28px, 7vw, 36px); }
+
+    .finding-data { grid-template-columns: 1fr; gap: 1vh; }
+
+    /* === 第三幕引子 KOX === */
+    .ecosystem-grid { grid-template-columns: repeat(2, 1fr); }
+    .ecosystem-cell {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 2.5vh 4vw;
+    }
+    .ecosystem-cell:nth-child(2n+1) { border-right: 1px solid var(--line); }
+    .ecosystem-cell:last-child { border-bottom: none; }
+    .ecosystem-cell:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+    .eco-name { font-size: clamp(24px, 6vw, 36px); }
+
+    /* === 案例屏 === */
+    .cases-grid { grid-template-columns: 1fr; gap: 2vh; }
+
+    /* === 4 角色总览 === */
+    .overview-title { font-size: clamp(36px, 8vw, 60px); }
+    .overview-grid { grid-template-columns: 1fr; }
+    .overview-col {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 2.5vh 5vw;
+    }
+    .overview-col:nth-child(2),
+    .overview-col:nth-child(3),
+    .overview-col:nth-child(4) { border-top: none; }
+    .overview-col:last-child { border-bottom: none; }
+    .col-title { font-size: clamp(28px, 7vw, 38px); }
+    .col-data-num { font-size: clamp(40px, 10vw, 60px); }
+
+    /* === 角色卡片屏 === */
+    .role-title { font-size: clamp(44px, 10vw, 80px); }
+    .role-grid { grid-template-columns: 1fr; }
+    .role-cell {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 2.5vh 5vw;
+    }
+    .role-cell:last-child { border-bottom: none; }
+    .role-footer { grid-template-columns: 1fr; gap: 2vh; margin-top: 2vh; }
+    .data-num { font-size: clamp(38px, 9vw, 56px); }
+
+    /* === 信任层级 === */
+    .trust-row {
+      grid-template-columns: 50px 1fr;
+      gap: 3vw;
+      padding: 1.5vh 4vw;
+      width: 100% !important;
+    }
+    .trust-row .trust-signal {
+      grid-column: 1 / -1;
+      text-align: left;
+      font-size: 12px;
+      padding-top: 6px;
+      border-top: 1px dotted var(--line);
+      margin-top: 6px;
+      max-width: 100%;
+    }
+    .trust-row .trust-name { font-size: clamp(15px, 4.5vw, 20px); }
+    .trust-row .trust-name .trust-explain { font-size: 0.78em; }
+    .trust-cliff { font-size: 10px; }
+    .trust-cliff::before,
+    .trust-cliff::after { display: none; }
+
+    /* === 完整生态地图 === */
+    .map-layer {
+      grid-template-columns: 1fr;
+      gap: 1.5vh;
+      padding: 2vh 4vw;
+    }
+    .map-meridian { grid-template-columns: 1fr; gap: 1.5vh; }
+
+    /* === 终幕升华 === */
+    .evolve-3layer { grid-template-columns: 1fr; }
+    .evolve-layer {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 2.5vh 5vw;
+    }
+    .evolve-layer:last-child { border-bottom: none; }
+    .evolve-layer-statement { font-size: clamp(22px, 5.5vw, 30px); }
+    .evolve-speeds-grid { grid-template-columns: 1fr 1fr; gap: 1vh 1vw; }
+    .evolve-speed { padding: 1.6vh 4vw; }
+
+    /* === ENDING === */
+    .closing-quote-a { font-size: clamp(24px, 6vw, 38px); }
+    .closing-quote-b { font-size: clamp(36px, 9vw, 60px); }
+    .closing-aux { font-size: clamp(13px, 3.6vw, 18px); padding: 0 4vw; }
+    .closing-sign { font-size: 10px; padding: 0 4vw; }
+    .slide-closing .halftone-blob { display: none; }
+
+    /* hero 大字在小屏去 stroke，避免渲染糙 */
+    .role-title,
+    .overview-title,
+    .finding-title,
+    .closing-quote-b,
+    .col-title,
+    .eco-name { -webkit-text-stroke: 0; }
+  }
+
+  /* ───── 小屏手机（≤480px）：极致单列 ───── */
+  @media (max-width: 480px) {
+    .ecosystem-grid { grid-template-columns: 1fr; }
+    .ecosystem-cell:nth-child(2n+1) { border-right: none; }
+    .ecosystem-cell { border-bottom: 1px solid var(--line); }
+    .ecosystem-cell:last-child { border-bottom: none; }
+    .evolve-speeds-grid { grid-template-columns: 1fr; }
+    .slide-1 .hero { font-size: clamp(60px, 16vw, 88px); }
+    .role-title { font-size: clamp(36px, 9vw, 60px); }
+    .overview-title { font-size: clamp(30px, 7.5vw, 50px); }
+    .finding-title { font-size: clamp(26px, 6.5vw, 42px); }
+    .closing-quote-b { font-size: clamp(30px, 8vw, 48px); }
+    .slide-role .halftone-blob,
+    .slide-overview .halftone-blob,
+    .slide-ecosystem .halftone-blob { display: none; }
+  }
 </style>
 </head>
 <body>
