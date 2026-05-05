@@ -112,6 +112,8 @@
     letter-spacing: 0.16em;
     color: var(--ink);
     text-transform: uppercase;
+    position: relative;
+    top: -4px;
   }
   .brand sup {
     font-size: 9px;
@@ -542,8 +544,8 @@
   /* ═════════════════════════════════════════════════════════════ */
   .slide-role {
     justify-content: center;
-    padding-top: 8vh;
-    padding-bottom: 8vh;
+    padding-top: 9.5vh;
+    padding-bottom: 7vh;
   }
   .role-container {
     max-width: 1400px;
@@ -817,8 +819,8 @@
   /* ═════════════════════════════════════════════════════════════ */
   .slide-overview {
     justify-content: center;
-    padding-top: 12vh;
-    padding-bottom: 12vh;
+    padding-top: 9vh;
+    padding-bottom: 9vh;
   }
   .overview-container {
     max-width: 1480px;
@@ -826,7 +828,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 3vh;
+    gap: 1.8vh;
     position: relative;
     z-index: 2;
   }
@@ -901,7 +903,7 @@
     gap: 0;
     border-top: 1.5px solid var(--ink);
     border-bottom: 1.5px solid var(--ink);
-    margin-top: 1vh;
+    margin-top: 0.2vh;
   }
   .overview-col {
     padding: 3vh 1.4vw;
@@ -1038,6 +1040,94 @@
     bottom: -60px;
     left: -80px;
     opacity: 0.08;
+  }
+
+  /* ─── 用户旅程指示器（角色屏 + 总览屏共用） ─── */
+  .role-journey {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 1.2vh;
+    font-family: var(--sans-cn);
+    font-size: clamp(11px, 0.9vw, 14px);
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+  }
+  .journey-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 3px;
+    transition: all 0.3s;
+  }
+  .journey-step.active {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 700;
+    font-size: clamp(12px, 0.95vw, 15px);
+  }
+  .journey-arrow {
+    font-family: var(--sans-en);
+    font-size: 10px;
+    color: var(--line);
+    margin: 0 4px;
+    letter-spacing: 0;
+  }
+  .role-car-role {
+    font-family: var(--sans-cn);
+    font-size: clamp(12px, 1vw, 16px);
+    color: var(--ink-mute);
+    margin-top: 0.4vh;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .role-car-role .car-label {
+    font-family: var(--sans-en);
+    font-size: 0.8em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  /* 总览屏旅程条 */
+  .overview-journey {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 0.4vh;
+    padding: 1vh 0;
+    font-family: var(--sans-cn);
+    font-size: clamp(12px, 1vw, 15px);
+  }
+  .overview-journey .oj-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+  }
+  .overview-journey .oj-stage {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: clamp(13px, 1.1vw, 17px);
+    margin-bottom: 4px;
+  }
+  .overview-journey .oj-label {
+    font-size: clamp(10px, 0.85vw, 13px);
+    color: var(--ink-mute);
+    font-weight: 400;
+  }
+  .overview-journey .oj-arrow {
+    font-family: var(--sans-en);
+    font-size: 18px;
+    color: var(--accent);
+    margin: 0 4px;
+    font-weight: 300;
+    flex-shrink: 0;
+    align-self: center;
   }
 
   /* ═════════════════════════════════════════════════════════════ */
@@ -1582,8 +1672,8 @@
   }
   .cases-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.4vw;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5vw;
     margin-top: 0.5vh;
   }
   .case-card {
@@ -1591,13 +1681,84 @@
     flex-direction: column;
     background: var(--paper);
     border: 1px solid var(--line);
-    padding: 1.6vh 1.2vw;
-    gap: 1.2vh;
+    padding: 2.2vh 1.8vw;
+    gap: 1.4vh;
     transition: border-color 0.25s, transform 0.25s;
+    cursor: pointer;
+    position: relative;
   }
   .case-card:hover {
     border-color: var(--ink);
     transform: translateY(-2px);
+  }
+  .case-card::after {
+    content: '点击展开 →';
+    position: absolute;
+    bottom: 1.4vh;
+    right: 1.4vw;
+    font-family: var(--sans-cn);
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .case-card:hover::after { opacity: 1; }
+  .case-brand-tag {
+    display: inline-block;
+    font-family: var(--sans-cn);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    padding: 3px 10px;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .case-brand-tag.tag-icc {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .case-hook {
+    font-family: var(--sans-cn);
+    font-size: clamp(13px, 1vw, 16px);
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-weight: 500;
+  }
+  .case-metrics {
+    display: flex;
+    gap: 1.5vw;
+    border-top: 1px dotted var(--line);
+    padding-top: 1.2vh;
+    margin-top: auto;
+  }
+  .case-metric {
+    flex: 1;
+  }
+  .case-metric-num {
+    font-family: var(--display-en);
+    font-size: clamp(20px, 1.8vw, 30px);
+    color: var(--accent);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .case-metric-label {
+    font-family: var(--sans-cn);
+    font-size: clamp(10px, 0.75vw, 12px);
+    color: var(--ink-mute);
+    margin-top: 3px;
+    font-weight: 500;
+  }
+  .case-role-tag {
+    font-family: var(--sans-cn);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink-mute);
+    letter-spacing: 0.06em;
+    margin-top: 4px;
   }
   .case-num {
     font-family: var(--display-en);
@@ -1685,6 +1846,285 @@
     color: var(--ink-mute);
     letter-spacing: 0.02em;
   }
+
+  /* ═════════════════════════════════════════════════════════════ */
+  /* 案例弹窗 Modal · 水平时间轴                                    */
+  /* ═════════════════════════════════════════════════════════════ */
+  .case-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(10,10,8,0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .case-modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* 弹窗外壳 —— 横向全屏 */
+  .case-modal {
+    background: var(--paper);
+    width: 96vw;
+    height: 88vh;
+    position: relative;
+    border: 1px solid var(--line);
+    transform: translateY(24px);
+    transition: transform 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .case-modal-overlay.active .case-modal {
+    transform: translateY(0);
+  }
+
+  /* 顶部条 —— 标题 + 关闭 */
+  .cm-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2vh 2.5vw;
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .cm-topbar-left {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2vw;
+  }
+  .cm-eyebrow {
+    font-family: var(--display-en);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 900;
+  }
+  .cm-title {
+    font-family: var(--sans-cn);
+    font-weight: 900;
+    font-size: clamp(18px, 1.8vw, 26px);
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .case-modal-close {
+    font-family: var(--display-en);
+    font-size: 28px;
+    color: var(--ink-mute);
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    flex-shrink: 0;
+  }
+  .case-modal-close:hover { color: var(--accent); }
+
+  /* 水平滚动轨道 */
+  .cm-track {
+    flex: 1;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cm-track::-webkit-scrollbar { height: 4px; }
+  .cm-track::-webkit-scrollbar-track { background: transparent; }
+  .cm-track::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+  .cm-track::-webkit-scrollbar-thumb:hover { background: var(--ink-mute); }
+
+  /* 单个面板 */
+  .cm-panel {
+    min-width: 80vw;
+    max-width: 80vw;
+    scroll-snap-align: center;
+    padding: 4vh 4vw;
+    display: flex;
+    gap: 3vw;
+    flex-shrink: 0;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .cm-panel:last-child { border-right: none; }
+
+  /* 面板内：左侧文字，右侧图片 */
+  .cm-panel-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+  .cm-panel-visual {
+    flex: 0 0 38%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+    justify-content: center;
+  }
+
+  /* 面板内元素 */
+  .cm-phase-label {
+    font-family: var(--display-en);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 900;
+    margin-bottom: 1vh;
+  }
+  .cm-phase-title {
+    font-family: var(--sans-cn);
+    font-weight: 900;
+    font-size: clamp(20px, 2.2vw, 32px);
+    color: var(--ink);
+    -webkit-text-stroke: 0.3px var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1.5vh;
+  }
+  .cm-phase-body {
+    font-family: var(--sans-cn);
+    font-size: clamp(13px, 1vw, 16px);
+    color: var(--ink-soft);
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .cm-phase-body strong { color: var(--ink); font-weight: 700; }
+
+  /* 数据条（用于 intro 面板） */
+  .cm-data-row {
+    display: flex;
+    gap: 2vw;
+    margin-top: 2.5vh;
+  }
+  .cm-datum {
+    text-align: left;
+  }
+  .cm-datum-num {
+    font-family: var(--display-en);
+    font-size: clamp(22px, 2.4vw, 36px);
+    color: var(--accent);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .cm-datum-label {
+    font-family: var(--sans-cn);
+    font-size: clamp(10px, 0.75vw, 12px);
+    color: var(--ink-mute);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* 图片占位 */
+  .cm-img-placeholder {
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(10,10,10,0.03),
+      rgba(10,10,10,0.03) 8px,
+      rgba(10,10,10,0.06) 8px,
+      rgba(10,10,10,0.06) 16px
+    );
+    border: 1.5px dashed var(--ink-mute);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--ink-mute);
+    font-family: var(--sans-cn);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    min-height: 180px;
+    flex: 1;
+  }
+  .cm-img-placeholder .cm-img-icon {
+    font-size: 28px;
+    opacity: 0.4;
+  }
+  .cm-img-placeholder.cm-img-tall { min-height: 260px; }
+
+  /* takeaway 面板 */
+  .cm-takeaway {
+    background: rgba(181,18,27,0.05);
+    border-left: 3px solid var(--accent);
+    padding: 2.5vh 2vw;
+    font-family: var(--sans-cn);
+    font-size: clamp(15px, 1.2vw, 19px);
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  .cm-takeaway strong { color: var(--accent); }
+
+  /* 底部导航条 */
+  .cm-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2vh 2.5vw;
+    border-top: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .cm-nav-dots {
+    display: flex;
+    gap: 8px;
+  }
+  .cm-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+    transition: background 0.25s, transform 0.25s;
+    cursor: pointer;
+  }
+  .cm-dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+  .cm-nav-hint {
+    font-family: var(--sans-cn);
+    font-size: 11px;
+    color: var(--ink-mute);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .cm-nav-arrows {
+    display: flex;
+    gap: 6px;
+  }
+  .cm-arrow {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line);
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display-en);
+    font-size: 16px;
+    color: var(--ink-mute);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .cm-arrow:hover { border-color: var(--ink); color: var(--ink); }
 
   /* ═════════════════════════════════════════════════════════════ */
   /* 信任层级屏（slide-trust）· 第三幕收尾                          */
@@ -2244,6 +2684,220 @@
   .slide:not(.in-view) .finding-subtitle { opacity: 0; }
 
   /* ═════════════════════════════════════════════════════════════ */
+  /* 实证屏 1 · slide-evidence（3 列 KPI 横向对比）                  */
+  /* ═════════════════════════════════════════════════════════════ */
+  .slide-evidence {
+    justify-content: center;
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+  }
+  .evidence-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    margin-top: 1vh;
+  }
+  .evidence-col {
+    padding: 2.8vh 1.6vw;
+    border-right: 1px solid var(--line);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vh;
+  }
+  .evidence-col:last-child { border-right: none; }
+  .ev-name {
+    font-family: var(--sans-en);
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    margin-bottom: 0.6vh;
+    text-transform: uppercase;
+  }
+  .ev-name .ev-name-cn {
+    display: block;
+    font-family: var(--sans-cn);
+    font-weight: 700;
+    font-size: clamp(15px, 1.25vw, 20px);
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-top: 4px;
+    text-transform: none;
+  }
+  .ev-top, .ev-bottom {
+    font-family: var(--sans-cn);
+    font-weight: 700;
+    font-size: clamp(18px, 1.6vw, 26px);
+    line-height: 1.3;
+  }
+  .ev-top { color: var(--ink); }
+  .ev-bottom { color: var(--ink-mute); }
+  .ev-arrow {
+    font-family: var(--display-en);
+    color: var(--ink-faint);
+    font-size: 16px;
+    line-height: 1;
+  }
+  .ev-divider {
+    width: 32px;
+    height: 1.5px;
+    background: var(--accent);
+    margin: 0.8vh auto;
+  }
+  .ev-mult {
+    font-family: var(--display-en);
+    font-weight: 900;
+    font-size: clamp(40px, 4.2vw, 64px);
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .ev-mult-label {
+    font-family: var(--sans-en);
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ═════════════════════════════════════════════════════════════ */
+  /* 实证屏 2 · slide-evidence-single（单 KPI 深度展开）             */
+  /* ═════════════════════════════════════════════════════════════ */
+  .slide-evidence-single {
+    justify-content: center;
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+  }
+  .slide-evidence-single .finding-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .slide-evidence-single .finding-eyebrow {
+    justify-content: center;
+  }
+  .slide-evidence-single .finding-title {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cpm-formula {
+    font-family: var(--serif-en);
+    font-size: clamp(13px, 1.05vw, 17px);
+    color: var(--ink-mute);
+    text-align: center;
+    margin: 2vh 0;
+    padding: 1.2vh 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    letter-spacing: 0.04em;
+    font-style: italic;
+  }
+  .cpm-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6vh;
+    max-width: 800px;
+    margin: 1vh auto;
+  }
+  .cpm-row {
+    display: grid;
+    grid-template-columns: 40px 80px 1fr 180px;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--sans-cn);
+    padding: 0.4vh 0;
+  }
+  .cpm-code {
+    font-family: var(--display-en);
+    font-weight: 900;
+    font-size: clamp(20px, 1.6vw, 26px);
+    color: var(--ink);
+    text-align: center;
+  }
+  .cpm-row.best .cpm-code,
+  .cpm-row.best .cpm-val { color: var(--accent); }
+  .cpm-val {
+    font-family: var(--display-en);
+    font-weight: 700;
+    font-size: clamp(16px, 1.3vw, 20px);
+    color: var(--ink);
+    text-align: right;
+  }
+  .cpm-bar {
+    height: 8px;
+    background: var(--ink);
+    opacity: 0.25;
+  }
+  .cpm-row.best .cpm-bar { background: var(--accent); opacity: 1; }
+  .cpm-row.worst .cpm-bar { background: var(--ink); opacity: 0.7; }
+  .cpm-tag {
+    font-family: var(--sans-cn);
+    font-size: clamp(11px, 0.9vw, 13px);
+    color: var(--ink-mute);
+    text-align: left;
+    letter-spacing: 0.02em;
+  }
+  .cpm-row.best .cpm-tag { color: var(--accent); font-weight: 700; }
+  .cpm-row.worst .cpm-tag { color: var(--ink); font-weight: 700; }
+  .cpm-conclusion {
+    margin-top: 3vh;
+    text-align: center;
+  }
+  .cpm-bignum {
+    font-family: var(--display-en);
+    font-weight: 900;
+    font-size: clamp(72px, 9vw, 140px);
+    color: var(--accent);
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    margin-bottom: 1vh;
+  }
+  .cpm-explain {
+    font-family: var(--serif-cn);
+    font-style: italic;
+    font-size: clamp(14px, 1.15vw, 20px);
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 660px;
+    margin: 0 auto;
+  }
+  .cpm-explain strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* ═════════════════════════════════════════════════════════════ */
+  /* Provenance 数据出处（每屏底部小字，存在感低）                    */
+  /* ═════════════════════════════════════════════════════════════ */
+  .provenance {
+    position: absolute;
+    bottom: 2.5vh;
+    left: 6vw;
+    right: 6vw;
+    font-family: var(--sans-en);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    opacity: 0.5;
+    text-align: right;
+    pointer-events: none;
+    z-index: 5;
+    line-height: 1.4;
+  }
+  .provenance::before {
+    content: "DATA · ";
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    margin-right: 4px;
+  }
+
+  /* ═════════════════════════════════════════════════════════════ */
   /* 目录系统（toc）· 不显眼的跳转面板                                */
   /* ═════════════════════════════════════════════════════════════ */
   .toc-trigger {
@@ -2741,9 +3395,9 @@
 
     <div class="compare-grid">
       <div class="compare-row anim anim-4">
-        <div class="label-l">自然流量 <span class="num-mute">70%</span></div>
+        <div class="label-l">自然流量 <span class="num-mute">主导</span></div>
         <div class="arrow-mid"></div>
-        <div class="label-r"><span class="num-big">35%</span>剩下 <span class="num-big">65%</span> 靠加热推</div>
+        <div class="label-r">自然占比 <span class="num-big">~10%</span> · 90% 投放靠加热</div>
       </div>
       <div class="compare-row anim anim-5">
         <div class="label-l">1 条爆款 = <span class="num-mute">3 个月</span> 话题</div>
@@ -2753,7 +3407,7 @@
       <div class="compare-row anim anim-6">
         <div class="label-l">头部 = 信任</div>
         <div class="arrow-mid"></div>
-        <div class="label-r">头部 NPS <span class="num-big">−0.09</span></div>
+        <div class="label-r">头部 NPS <span class="num-big">−0.13 至 +0.14</span></div>
       </div>
       <div class="compare-row anim anim-7">
         <div class="label-l">KOL 是稀缺第三方</div>
@@ -2768,6 +3422,7 @@
     </div>
 
     <div class="signature anim anim-10">不是答案。是我们摸到的几块石头。</div>
+    <div class="provenance">6 品牌 / 2588 条 / 2025.05-2026.03 · 部分含历史观察</div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
@@ -2841,7 +3496,7 @@
       <h2 class="finding-title">KOL 有没有效，<br><em>不是品牌单方面</em>决定的</h2>
 
       <div class="finding-subtitle anim anim-3">
-        盘 504 条投放时，我们撞上的第一个反直觉——
+        盘 6 品牌 2588 条投放时，我们撞上的第一个反直觉——
         很多"我们做得不够好"的归因，其实是水面下的力量在起作用。
       </div>
 
@@ -2869,18 +3524,82 @@
       <div class="finding-data anim anim-7">
         <div class="finding-data-label">反直觉数据</div>
         <div class="finding-data-content">
-          504 条投放，自然播放仅<span class="data-num">35%</span>——
-          剩下 <strong>65% 必须靠平台加热推上去</strong>。
-          这不是品牌的问题，是平台算法在系统性抑制商业内容的自然分发。
+          <strong>汇总看</strong>：自然播放占比 median 仅
+          <span class="data-num">~10%</span>
+          —— 这是<strong>平台算法在系统性抑制商业内容的自然分发</strong>。
+          <br><br>
+          <strong>细看 6 品牌</strong>：median 范围
+          <span class="data-num">5% - 28%</span>
+          （5.95× 跨度）—— 这是<strong>不同品牌的博弈能力差距已经出现</strong>。
         </div>
       </div>
     </div>
+    <div class="provenance">6 品牌 / 2588 条 / 2025.05-2026.03 · Kruskal-Wallis p &lt; 1e-48</div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- 屏 4 · 第二幕 · FINDING 02 水面下决定水面上                    -->
+  <!-- 屏 4 · 第二幕 · 品牌博弈差距（实证 01）                          -->
   <!-- ════════════════════════════════════════════════════════════ -->
-  <section class="slide slide-finding" data-chapter="第二幕 · 3 件反直觉的事" data-no="4">
+  <section class="slide slide-evidence" data-chapter="第二幕 · 实证">
+    <div class="halftone-blob" style="position:absolute;width:300px;height:300px;border-radius:50%;background-image:radial-gradient(circle,var(--ink) 1px,transparent 1.2px);background-size:6px 6px;opacity:0.1;pointer-events:none;z-index:0;top:-80px;right:-100px;"></div>
+
+    <div class="finding-container">
+      <div class="finding-eyebrow anim anim-1">
+        <span class="role-num">EVIDENCE</span>
+        <span class="role-divider"></span>
+        <span class="role-chapter">第二幕 · 实证</span>
+      </div>
+
+      <h2 class="finding-title">品牌博弈 <em>差距</em></h2>
+
+      <div class="finding-subtitle anim anim-3">
+        同一行业 · 同一时段 · 同一平台 · 方法论公开可得——
+        差距来自<strong>博弈胜负</strong>，不来自先天属性。
+      </div>
+
+      <div class="evidence-3col">
+        <div class="evidence-col anim anim-4">
+          <div class="ev-name">METRIC 01<span class="ev-name-cn">看后搜率</span></div>
+          <div class="ev-top">品牌 F · 0.43%</div>
+          <div class="ev-arrow">↓</div>
+          <div class="ev-bottom">品牌 B · 0.02%</div>
+          <div class="ev-divider"></div>
+          <div class="ev-mult">27.5×</div>
+          <div class="ev-mult-label">RANGE</div>
+        </div>
+
+        <div class="evidence-col anim anim-5">
+          <div class="ev-name">METRIC 02<span class="ev-name-cn">跨圈占比</span></div>
+          <div class="ev-top">品牌 A · 69.9%</div>
+          <div class="ev-arrow">↓</div>
+          <div class="ev-bottom">品牌 F · 21.2%</div>
+          <div class="ev-divider"></div>
+          <div class="ev-mult">3.3×</div>
+          <div class="ev-mult-label">RANGE</div>
+        </div>
+
+        <div class="evidence-col anim anim-6">
+          <div class="ev-name">METRIC 03<span class="ev-name-cn">纯自然 CPM</span></div>
+          <div class="ev-top">品牌 E · ¥225</div>
+          <div class="ev-arrow">↓</div>
+          <div class="ev-bottom">品牌 B · ¥601</div>
+          <div class="ev-divider"></div>
+          <div class="ev-mult">2.7×</div>
+          <div class="ev-mult-label">RANGE</div>
+        </div>
+      </div>
+
+      <div class="finding-punch anim anim-9">
+        同一赛道、同一时期，品牌间的 KOL 营销效率已经拉开 <strong>数量级差距</strong>——有人跑通了，有人还在原地
+      </div>
+    </div>
+    <div class="provenance">6 品牌 / 2588 条 / 2025.05-2026.03 · 品牌脱敏代号 A-F</div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- 屏 5 · 第二幕 · FINDING 02 水面下决定水面上                    -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="slide slide-finding" data-chapter="第二幕 · 3 件反直觉的事" data-no="6">
     <div class="finding-container">
       <div class="finding-eyebrow anim anim-1">
         <span class="role-num">FINDING 02 / 03</span>
@@ -2925,16 +3644,17 @@
       </div>
 
       <div class="finding-punch anim anim-7">
-        同样的看后搜率 <strong>0.56%</strong>——
+        同样的看后搜率——
         <span class="punch-red">2025 和 2026 的含义可能完全不一样</span>
       </div>
     </div>
+    <div class="provenance">观察类论点 · 数据见行业 KFS / 算法政策追踪</div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- 屏 5 · 第二幕 · FINDING 03 一份 brief 三种期待                 -->
+  <!-- 屏 7 · 第二幕 · FINDING 03 一份 brief 三种期待                 -->
   <!-- ════════════════════════════════════════════════════════════ -->
-  <section class="slide slide-finding" data-chapter="第二幕 · 3 件反直觉的事" data-no="5">
+  <section class="slide slide-finding" data-chapter="第二幕 · 3 件反直觉的事" data-no="7">
     <div class="finding-container">
       <div class="finding-eyebrow anim anim-1">
         <span class="role-num">FINDING 03 / 03</span>
@@ -3062,7 +3782,7 @@
   <!-- ════════════════════════════════════════════════════════════ -->
   <!-- 屏 N · 第三幕引子 · 4 个真实案例（占位）                       -->
   <!-- ════════════════════════════════════════════════════════════ -->
-  <section class="slide slide-cases" data-chapter="第三幕引子 · 4 个真实案例">
+  <section class="slide slide-cases" data-chapter="第三幕引子 · 2 个真实案例">
     <div class="halftone-blob" style="position:absolute;width:300px;height:300px;border-radius:50%;background-image:radial-gradient(circle,var(--ink) 1px,transparent 1.2px);background-size:6px 6px;opacity:0.1;pointer-events:none;z-index:0;bottom:-80px;left:-100px;"></div>
 
     <div class="cases-container">
@@ -3072,78 +3792,73 @@
         <span class="role-chapter">第三幕引子 · 实证</span>
       </div>
 
-      <h2 class="finding-title">先看 <em>4 个真实案例</em></h2>
+      <h2 class="finding-title">先看 <em>2 个真实的事</em></h2>
 
       <div class="finding-subtitle anim anim-3">
-        在进入抽象方法论之前——给 KOL 这件事一个着陆点。
+        在进入方法论之前——看看真实世界里，品牌和 KOL 之间到底在发生什么。
       </div>
 
       <div class="cases-grid">
 
-        <!-- CASE 01 占位 -->
-        <div class="case-card anim anim-4">
+        <!-- CASE 01 · 江仁基 × 大众 -->
+        <div class="case-card anim anim-4" onclick="openCaseModal('jiangRenJi')">
           <div class="case-num">CASE 01</div>
-          <div class="case-image-placeholder">
-            <div class="case-image-icon">⊞</div>
-            <div>Image Placeholder</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="case-brand-tag">大众</span>
+            <span class="case-brand-tag tag-icc">ICC 操盘</span>
           </div>
-          <div class="case-title">[案例 01 标题]</div>
-          <div class="case-desc">[案例描述占位 — 这里放一两句案例核心亮点，体现 KOL 在这次合作中扮演的角色]</div>
-          <div class="case-data">
-            <div class="case-data-num">XX%</div>
-            <div class="case-data-label">[关键数据占位]</div>
+          <div class="case-title">江仁基 · 陕A帕萨特</div>
+          <div class="case-hook">
+            偶发热点事件升格为品牌主导车主 IP——ICC 2 小时建联，24 小时内容上线，从热点捕捉到长线 IP 化运营。
           </div>
+          <div class="case-metrics">
+            <div class="case-metric">
+              <div class="case-metric-num">2.3亿+</div>
+              <div class="case-metric-label">累计总播放</div>
+            </div>
+            <div class="case-metric">
+              <div class="case-metric-num">120万+</div>
+              <div class="case-metric-label">累计总互动</div>
+            </div>
+            <div class="case-metric">
+              <div class="case-metric-num">2h</div>
+              <div class="case-metric-label">建联响应</div>
+            </div>
+          </div>
+          <div class="case-role-tag">偶发热点 → 品牌 IP 化运营</div>
         </div>
 
-        <!-- CASE 02 占位 -->
-        <div class="case-card anim anim-5">
+        <!-- CASE 02 · 大力仑 × 长城炮 -->
+        <div class="case-card anim anim-5" onclick="openCaseModal('daLiLun')">
           <div class="case-num">CASE 02</div>
-          <div class="case-image-placeholder">
-            <div class="case-image-icon">⊞</div>
-            <div>Image Placeholder</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="case-brand-tag">长城</span>
           </div>
-          <div class="case-title">[案例 02 标题]</div>
-          <div class="case-desc">[案例描述占位 — 这里放一两句案例核心亮点，体现 KOL 在这次合作中扮演的角色]</div>
-          <div class="case-data">
-            <div class="case-data-num">XX%</div>
-            <div class="case-data-label">[关键数据占位]</div>
+          <div class="case-title">大力仑 · 长城炮</div>
+          <div class="case-hook">
+            一声魔性的"长城~炮！"意外出圈，品牌 48 小时极速响应，两年持续运营，市值飙升 170 亿。
           </div>
-        </div>
-
-        <!-- CASE 03 占位 -->
-        <div class="case-card anim anim-6">
-          <div class="case-num">CASE 03</div>
-          <div class="case-image-placeholder">
-            <div class="case-image-icon">⊞</div>
-            <div>Image Placeholder</div>
+          <div class="case-metrics">
+            <div class="case-metric">
+              <div class="case-metric-num">55亿+</div>
+              <div class="case-metric-label">话题总播放量</div>
+            </div>
+            <div class="case-metric">
+              <div class="case-metric-num">450万</div>
+              <div class="case-metric-label">单条点赞</div>
+            </div>
+            <div class="case-metric">
+              <div class="case-metric-num">170亿</div>
+              <div class="case-metric-label">市值拉动</div>
+            </div>
           </div>
-          <div class="case-title">[案例 03 标题]</div>
-          <div class="case-desc">[案例描述占位 — 这里放一两句案例核心亮点，体现 KOL 在这次合作中扮演的角色]</div>
-          <div class="case-data">
-            <div class="case-data-num">XX%</div>
-            <div class="case-data-label">[关键数据占位]</div>
-          </div>
-        </div>
-
-        <!-- CASE 04 占位 -->
-        <div class="case-card anim anim-7">
-          <div class="case-num">CASE 04</div>
-          <div class="case-image-placeholder">
-            <div class="case-image-icon">⊞</div>
-            <div>Image Placeholder</div>
-          </div>
-          <div class="case-title">[案例 04 标题]</div>
-          <div class="case-desc">[案例描述占位 — 这里放一两句案例核心亮点，体现 KOL 在这次合作中扮演的角色]</div>
-          <div class="case-data">
-            <div class="case-data-num">XX%</div>
-            <div class="case-data-label">[关键数据占位]</div>
-          </div>
+          <div class="case-role-tag">偶发热点 → 品牌 IP 化运营</div>
         </div>
 
       </div>
 
       <div class="cases-footer anim anim-9">
-        — 看完之后，下一节我们一起来看 KOL 在矩阵里的样态 —
+        — 点击卡片查看完整案例 · 看完之后，我们一起拆解 KOL 的角色地图 —
       </div>
     </div>
   </section>
@@ -3165,9 +3880,30 @@
       <h2 class="overview-title">四个<em>不可替代</em>的角色</h2>
 
       <div class="overview-sub anim anim-3">
-        当 KOL 不再是「借嘴的唯一选择」——它在 KOX 矩阵里，到底应该扮演什么？
-        <br>
-        我们盘下来发现：<strong>有 4 件事，KOC、KOE、KOS、KOB 都做不了</strong>。
+        4 个角色沿用户旅程<strong>递进配合</strong>，不是并列替代。
+      </div>
+
+      <!-- 用户旅程进度条 -->
+      <div class="overview-journey anim anim-3">
+        <div class="oj-step">
+          <div class="oj-stage">破圈</div>
+          <div class="oj-label">不知道你 → 看到你</div>
+        </div>
+        <div class="oj-arrow">→</div>
+        <div class="oj-step">
+          <div class="oj-stage">种草</div>
+          <div class="oj-label">看到了 → 开始想要</div>
+        </div>
+        <div class="oj-arrow">→</div>
+        <div class="oj-step">
+          <div class="oj-stage">背书</div>
+          <div class="oj-label">想要了 → 做决定</div>
+        </div>
+        <div class="oj-arrow">→</div>
+        <div class="oj-step">
+          <div class="oj-stage">沉淀</div>
+          <div class="oj-label">决定了 → 持续认同</div>
+        </div>
       </div>
 
       <div class="overview-grid">
@@ -3178,71 +3914,69 @@
           <h3 class="col-title">跨圈<br>引爆器</h3>
           <div class="col-en">Cross-circle Detonator</div>
           <div class="col-def">
-            突破汽车<strong>垂类茧房</strong>——
-            借非汽车圈层 KOL 的粉丝信任撬动新人群。
+            让从没想过买车的人<strong>第一次看到</strong>——
+            车在内容里只是客串，KOL 的世界才是主角。
           </div>
           <div class="col-data">
-            <div class="col-data-num">2.7<span class="col-data-suffix">×</span></div>
-            <div class="col-data-label">娱乐运动看后搜率<br>是汽车垂类的 2.7 倍</div>
+            <div class="col-data-num">70<span class="col-data-suffix">%</span></div>
+            <div class="col-data-label">跨圈占比最高品牌<br>A3 蓄水效率排名前 2</div>
           </div>
         </div>
 
-        <!-- 02 专业话语权背书器 -->
+        <!-- 02 场景种草机 -->
         <div class="overview-col anim anim-5">
           <div class="col-num">02</div>
-          <h3 class="col-title">专业话语权<br>背书器</h3>
-          <div class="col-en">Authority Endorser</div>
+          <h3 class="col-title">场景<br>种草机</h3>
+          <div class="col-en">Scenario Seeder</div>
           <div class="col-def">
-            借<strong>第三方专业权威</strong>——
-            给新车型、新技术、新概念背书。
-          </div>
-          <div class="col-data">
-            <div class="col-data-num">0.4<span class="col-data-suffix">%</span></div>
-            <div class="col-data-label">头部专业看后搜率<br>仍高于腰尾部 1.7-3 倍</div>
-          </div>
-        </div>
-
-        <!-- 03 内容持续生产引擎 -->
-        <div class="overview-col anim anim-6">
-          <div class="col-num">03</div>
-          <h3 class="col-title">内容持续<br>生产引擎</h3>
-          <div class="col-en">Content Engine</div>
-          <div class="col-def">
-            做<strong>长期内容供应方</strong>——
-            年框合作、共创内容、积累品牌资产。
-          </div>
-          <div class="col-data">
-            <div class="col-data-num">71.4<span class="col-data-suffix">%</span></div>
-            <div class="col-data-label">尾部达人自然 A3 占比<br>长期合作的累积价值</div>
-          </div>
-        </div>
-
-        <!-- 04 场景共创者 -->
-        <div class="overview-col anim anim-7">
-          <div class="col-num">04</div>
-          <h3 class="col-title">场景<br>共创者</h3>
-          <div class="col-en">Scenario Co-creator</div>
-          <div class="col-def">
-            把车放进<strong>brief 写不出来</strong>的——
-            真实日常场景里，被自然看见。
+            让看到的人<strong>开始想要</strong>——
+            车是向往生活的共同主角，场景激发拥有欲。
           </div>
           <div class="col-data">
             <div class="col-data-num">78.1<span class="col-data-suffix">%</span></div>
-            <div class="col-data-label">某项目跨场景达人合作<br>自然播放占比</div>
+            <div class="col-data-label">场景合作自然播放占比<br>算法天然偏爱真实场景</div>
+          </div>
+        </div>
+
+        <!-- 03 专业话语权背书器 -->
+        <div class="overview-col anim anim-6">
+          <div class="col-num">03</div>
+          <h3 class="col-title">专业话语权<br>背书器</h3>
+          <div class="col-en">Authority Endorser</div>
+          <div class="col-def">
+            让心动的人<strong>做出决定</strong>——
+            借第三方专业权威消除最后的犹豫。
+          </div>
+          <div class="col-data">
+            <div class="col-data-num">3.51<span class="col-data-suffix">×</span></div>
+            <div class="col-data-label">头部专业看后搜率<br>是尾部的 3.51 倍</div>
+          </div>
+        </div>
+
+        <!-- 04 内容持续生产引擎 -->
+        <div class="overview-col anim anim-7">
+          <div class="col-num">04</div>
+          <h3 class="col-title">内容持续<br>生产引擎</h3>
+          <div class="col-en">Content Engine</div>
+          <div class="col-def">
+            让品牌有<strong>持续的人设一致性</strong>——
+            KOL 就是品牌的脸，12 个月以上深度绑定。
+          </div>
+          <div class="col-data">
+            <div class="col-data-num">9.88<span class="col-data-suffix">×</span></div>
+            <div class="col-data-label">6 品牌 A3 蓄水效率跨度<br>长期合作的累积价值</div>
           </div>
         </div>
 
       </div>
 
-      <div class="overview-footer anim anim-9">
-        — 4 个角色互相<span class="accent-em">补位</span>，缺一不可。单一角色再强，也撑不起 KOX 矩阵 —
-      </div>
 
     </div>
+    <div class="provenance">6 品牌 / 2588 条 · 4 角色数据来源见各角色屏</div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- 屏 7 · 角色卡片 · 跨圈引爆器（ROLE 01/04）                    -->
+  <!-- 屏 8 · ROLE 01 · 跨圈引爆器（破圈：不知道你 → 看到你）         -->
   <!-- ════════════════════════════════════════════════════════════ -->
   <section class="slide slide-role" data-chapter="第三幕 · 四个角色，一张地图" data-no="7">
     <div class="halftone-blob tr"></div>
@@ -3256,12 +3990,25 @@
         <span class="role-chapter">第三幕 · 四个不可替代的角色</span>
       </div>
 
+      <!-- 用户旅程指示器 -->
+      <div class="role-journey anim anim-2">
+        <div class="journey-step active">破圈 · 不知道你→看到你</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">种草</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">背书</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">沉淀</div>
+      </div>
+
       <h2 class="role-title">跨圈引爆器</h2>
       <div class="role-subtitle">Cross-circle Detonator</div>
 
       <div class="role-def anim anim-3">
-        撬动汽车圈层<strong style="color:var(--ink); font-weight:700;">之外</strong>的人群——
-        <span class="role-def-em">让品牌从垂类茧房里跳出去</span>。
+        借非汽车圈 KOL 的粉丝信任，让品牌<strong style="color:var(--ink); font-weight:700;">第一次出现在圈外人的视野里</strong>——<span class="role-def-em">以「被介绍的新朋友」身份沉淀 A3 心智</span>。
+      </div>
+      <div class="role-car-role anim anim-3">
+        <span class="car-label">车的角色</span>KOL 介绍给粉丝的「新朋友」——在 KOL 的世界里自然出场，不喧宾夺主
       </div>
 
       <!-- ─── 中部 3 列方法论 ─── -->
@@ -3269,24 +4016,23 @@
         <div class="role-cell anim anim-4">
           <div class="cell-eyebrow"><span class="cell-no">01</span>选号方向</div>
           <div class="cell-body">
-            <div class="cell-tag">娱乐 / 运动</div>
-            <div class="cell-tag">才艺 / 生活</div>
-            <div class="cell-tag">母婴 / 亲子</div>
-            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 按目标人群"在哪刷"反推</div>
+            <div class="cell-tag">娱乐 / 搞笑 / 运动</div>
+            <div class="cell-tag">才艺 / 生活 / 母婴</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 粉丝圈层与汽车<strong style="color:var(--ink);font-weight:700;">零重叠</strong></div>
           </div>
         </div>
         <div class="role-cell anim anim-5">
           <div class="cell-eyebrow"><span class="cell-no">02</span>Brief 怎么写</div>
           <div class="cell-body cell-brief">
-            <div class="cell-cross">"我们的车有 ABC 三个核心卖点"</div>
-            <div class="cell-do">"在你日常生活的什么场景里，能自然带出这台车"</div>
+            <div class="cell-cross">"帮我们推三个卖点"</div>
+            <div class="cell-do">"怎么把这台车当新朋友介绍给你的粉丝——让他们建立第一印象"</div>
           </div>
         </div>
         <div class="role-cell anim anim-6">
           <div class="cell-eyebrow"><span class="cell-no">03</span>怎么考核</div>
           <div class="cell-body">
-            <div class="cell-kpi">跨圈渗透率</div>
-            <div class="cell-kpi">新人群发现量</div>
+            <div class="cell-kpi">评论区车相关讨论占比</div>
+            <div class="cell-kpi">新人群首次触达量</div>
             <div class="cell-kpi">A3 蓄水增量</div>
           </div>
         </div>
@@ -3297,34 +4043,36 @@
         <div class="role-data anim anim-7">
           <div class="data-eyebrow">反直觉数据</div>
           <div class="data-main">
-            娱乐运动达人看后搜率
-            <span class="data-num">1.463%</span>
-            <span class="data-vs">vs</span>
-            汽车垂类
-            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">0.540%</span>
+            跨圈占比
+            <span class="data-num">70%</span>
+            的品牌
+            <span class="data-vs">→</span>
+            A3 蓄水效率
+            <span class="data-num" style="color:var(--accent); font-size:0.7em;">前 2</span>
           </div>
           <div class="data-conclusion">
             <span style="color:var(--accent); font-weight:900;">→</span>
-            跨圈是垂类的
-            <span class="data-mult">2.7×</span>
+            跨圈选号是 A3 人群心智蓄水的
+            <span class="data-mult">关键变量</span>
           </div>
         </div>
 
         <div class="role-pitfall anim anim-8">
-          <div class="pitfall-title">我们踩过的坑</div>
+          <div class="pitfall-title">合作深度</div>
           <div class="pitfall-text">
-            某次找了一个跟车毫无关联的旅行 KOL，结果评论区第一条直接是
-            <span class="pitfall-quote">"你跟这车有什么关系？"</span>
-            ——跨圈不等于乱选。
+            轻量级 · 1-2 条 · 交易型合作
+            <br><br>
+            <span style="color:var(--ink-mute);font-style:normal;font-size:0.9em;">不控制脚本，但把控故事调性和场景品质——「自然」不等于「随便」</span>
           </div>
         </div>
       </div>
 
     </div>
+    <div class="provenance">6 品牌 / 2588 条 · 跨圈占比 vs A3 蓄水效率正相关</div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- 屏 8 · 角色卡片 · 专业话语权背书器（ROLE 02/04）              -->
+  <!-- 屏 9 · ROLE 02 · 场景种草机（种草：看到了 → 开始想要）          -->
   <!-- ════════════════════════════════════════════════════════════ -->
   <section class="slide slide-role" data-chapter="第三幕 · 四个角色，一张地图" data-no="8">
     <div class="halftone-blob tr"></div>
@@ -3338,73 +4086,90 @@
         <span class="role-chapter">第三幕 · 四个不可替代的角色</span>
       </div>
 
-      <h2 class="role-title">专业话语权<br>背书器</h2>
-      <div class="role-subtitle">Authority Endorser</div>
-
-      <div class="role-def anim anim-3">
-        借<strong style="color:var(--ink); font-weight:700;">第三方专业权威</strong>——
-        <span class="role-def-em">给新车型、新技术、新概念借信用</span>。
+      <!-- 用户旅程指示器 -->
+      <div class="role-journey anim anim-2">
+        <div class="journey-step">破圈</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step active">种草 · 看到了→开始想要</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">背书</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">沉淀</div>
       </div>
 
+      <h2 class="role-title">场景种草机</h2>
+      <div class="role-subtitle">Scenario Seeder</div>
+
+      <div class="role-def anim anim-3">
+        让看到品牌的人<strong style="color:var(--ink); font-weight:700;">开始想要拥有</strong>——
+        <span class="role-def-em">场景激发欲望：「这种生活我也想，而这台车能带我去」</span>。
+      </div>
+      <div class="role-car-role anim anim-3">
+        <span class="car-label">车的角色</span>共同主角——场景和车缺一不可，车是体验的一部分
+      </div>
+
+      <!-- ─── 中部 3 列方法论 ─── -->
       <div class="role-grid">
         <div class="role-cell anim anim-4">
           <div class="cell-eyebrow"><span class="cell-no">01</span>选号方向</div>
           <div class="cell-body">
-            <div class="cell-tag">垂类深度专家</div>
-            <div class="cell-tag">技术派 KOL</div>
-            <div class="cell-tag">资深车评人 / 行业领袖</div>
-            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 专业积累 ≥ 3 年</div>
+            <div class="cell-tag">旅行 / 露营 / 户外</div>
+            <div class="cell-tag">亲子 / 美食探店</div>
+            <div class="cell-tag">宠物 / 改装</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 代表<strong style="color:var(--ink);font-weight:700;">向往生活方式</strong>的垂类</div>
           </div>
         </div>
         <div class="role-cell anim anim-5">
           <div class="cell-eyebrow"><span class="cell-no">02</span>Brief 怎么写</div>
           <div class="cell-body cell-brief">
-            <div class="cell-cross">"我们的车是同级最好的"</div>
-            <div class="cell-do">"用你的专业框架拆解我们的产品，包括你认为可以更好的地方"</div>
+            <div class="cell-cross">"请展示我们车的 A/B/C 功能"</div>
+            <div class="cell-do">"你的粉丝向往什么生活、被什么场景困扰？这台车怎么出现在答案里？"</div>
           </div>
         </div>
         <div class="role-cell anim anim-6">
           <div class="cell-eyebrow"><span class="cell-no">03</span>怎么考核</div>
           <div class="cell-body">
-            <div class="cell-kpi">A3 → A4 转化率</div>
-            <div class="cell-kpi">品牌搜索词质量</div>
-            <div class="cell-kpi">决策深度（对比 / 留资）</div>
+            <div class="cell-kpi">看后搜率</div>
+            <div class="cell-kpi">评论区车型×场景需求讨论占比</div>
+            <div class="cell-kpi">A3 蓄水增量</div>
           </div>
         </div>
       </div>
 
+      <!-- ─── 底部数据 + 踩坑 ─── -->
       <div class="role-footer">
         <div class="role-data anim anim-7">
           <div class="data-eyebrow">反直觉数据</div>
           <div class="data-main">
-            头部达人看后搜率
-            <span class="data-num">0.40%</span>
-            <span class="data-vs">vs</span>
-            尾部
-            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">0.136%</span>
+            场景合作自然播放
+            <span class="data-num">78.1%</span>
+            <span class="data-vs">·</span>
+            自然 CPA3
+            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">¥0.64</span>
           </div>
           <div class="data-conclusion">
             <span style="color:var(--accent); font-weight:900;">→</span>
-            头部专业溢价仍是
-            <span class="data-mult">2.9×</span>
+            真实场景获得
+            <span class="data-mult">天然分发优势</span>
           </div>
         </div>
 
         <div class="role-pitfall anim anim-8">
-          <div class="pitfall-title">我们踩过的坑</div>
+          <div class="pitfall-title">合作深度</div>
           <div class="pitfall-text">
-            某次找了流量很大但"不开车"的搞笑博主，发布后评论区第一条直接是
-            <span class="pitfall-quote">"你不是连驾照都没有吗？"</span>
-            ——专业权威不能借，得真有积累。
+            中等 · 短系列 3-5 条 · 同一场景形成记忆
+            <br><br>
+            <span style="color:var(--ink-mute);font-style:normal;font-size:0.9em;">车和场景共同讲故事——不是广告植入，是真实体验记录</span>
           </div>
         </div>
       </div>
 
     </div>
+    <div class="provenance">荣威单品牌 / 504 条 · 场景类 28.6% vs 非场景 9.3% (3.07×)</div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- 屏 9 · 角色卡片 · 内容持续生产引擎（ROLE 03/04）              -->
+  <!-- 屏 10 · ROLE 03 · 专业话语权背书器（背书：想要了 → 做决定）     -->
   <!-- ════════════════════════════════════════════════════════════ -->
   <section class="slide slide-role" data-chapter="第三幕 · 四个角色，一张地图" data-no="9">
     <div class="halftone-blob tr"></div>
@@ -3418,37 +4183,51 @@
         <span class="role-chapter">第三幕 · 四个不可替代的角色</span>
       </div>
 
-      <h2 class="role-title">内容持续<br>生产引擎</h2>
-      <div class="role-subtitle">Content Engine</div>
+      <!-- 用户旅程指示器 -->
+      <div class="role-journey anim anim-2">
+        <div class="journey-step">破圈</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">种草</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step active">背书 · 想要了→做决定</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">沉淀</div>
+      </div>
+
+      <h2 class="role-title">专业话语权<br>背书器</h2>
+      <div class="role-subtitle">Authority Endorser</div>
 
       <div class="role-def anim anim-3">
-        把 KOL 当作<strong style="color:var(--ink); font-weight:700;">长期内容供应方</strong>——
-        <span class="role-def-em">年框合作、共创内容、积累品牌资产</span>。
+        让心动的人<strong style="color:var(--ink); font-weight:700;">做出最终决定</strong>——
+        <span class="role-def-em">借第三方专业权威，消除「最后 10% 犹豫」</span>。
+      </div>
+      <div class="role-car-role anim anim-3">
+        <span class="car-label">车的角色</span>被审视的主体——产品本身是内容核心，被拆解、被评判
       </div>
 
       <div class="role-grid">
         <div class="role-cell anim anim-4">
           <div class="cell-eyebrow"><span class="cell-no">01</span>选号方向</div>
           <div class="cell-body">
-            <div class="cell-tag">准代言人型 KOL</div>
-            <div class="cell-tag">调性深度匹配</div>
-            <div class="cell-tag">少而精：3-5 人</div>
-            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 年框 ≥ 12 个月</div>
+            <div class="cell-tag">垂类深度专家</div>
+            <div class="cell-tag">技术派 KOL</div>
+            <div class="cell-tag">资深车评人 / 行业领袖</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 专业积累 ≥ 3 年 · 产品节点驱动</div>
           </div>
         </div>
         <div class="role-cell anim anim-5">
           <div class="cell-eyebrow"><span class="cell-no">02</span>Brief 怎么写</div>
           <div class="cell-body cell-brief">
-            <div class="cell-cross">"本期 Campaign 主推 A/B/C 卖点"</div>
-            <div class="cell-do">"12 个月里，你想跟我们品牌一起讲一个什么样的故事？"</div>
+            <div class="cell-cross">"我们的车是同级最好的"</div>
+            <div class="cell-do">"用你的专业框架帮犹豫的人做决定，包括你认为可以更好的地方"</div>
           </div>
         </div>
         <div class="role-cell anim anim-6">
           <div class="cell-eyebrow"><span class="cell-no">03</span>怎么考核</div>
           <div class="cell-body">
-            <div class="cell-kpi">内容资产沉淀</div>
-            <div class="cell-kpi">长期一致性</div>
-            <div class="cell-kpi">自然流量贡献占比</div>
+            <div class="cell-kpi">评论区「被种草」占比</div>
+            <div class="cell-kpi">决策深度（对比 / 留资）</div>
+            <div class="cell-kpi">看后搜率</div>
           </div>
         </div>
       </div>
@@ -3457,33 +4236,35 @@
         <div class="role-data anim anim-7">
           <div class="data-eyebrow">反直觉数据</div>
           <div class="data-main">
-            尾部达人自然 A3 占比
-            <span class="data-num">71.4%</span>
+            头部达人看后搜率
+            <span class="data-num">0.137%</span>
             <span class="data-vs">vs</span>
-            头部
-            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">~25%</span>
+            尾部
+            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">0.039%</span>
           </div>
           <div class="data-conclusion">
             <span style="color:var(--accent); font-weight:900;">→</span>
-            长期合作的累积自然流量
-            <span class="data-mult">远 &gt; 单次爆款</span>
+            头部专业溢价
+            <span class="data-mult">3.51×</span>
           </div>
         </div>
 
         <div class="role-pitfall anim anim-8">
-          <div class="pitfall-title">我们踩过的坑</div>
+          <div class="pitfall-title">合作深度</div>
           <div class="pitfall-text">
-            某次想把一个调性匹配的 KOL 锁年框，但每期 Campaign 都强行套进单期卖点，三个月后 KOL 自己说：
-            <span class="pitfall-quote">"你们要的是广告人，不是合作伙伴"</span>。
+            中等 · 产品节点驱动（上市 / 改款 / 横评）
+            <br><br>
+            <span style="color:var(--ink-mute);font-style:normal;font-size:0.9em;">专业权威不能借——得真有积累。没驾照的搞笑博主做不了这件事</span>
           </div>
         </div>
       </div>
 
     </div>
+    <div class="provenance">品牌 D 单品牌 / 732 条 · 因其他品牌缺粉丝数字段</div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- 屏 10 · 角色卡片 · 场景共创者（ROLE 04/04）                   -->
+  <!-- 屏 11 · ROLE 04 · 内容持续生产引擎（沉淀：决定了 → 持续认同）   -->
   <!-- ════════════════════════════════════════════════════════════ -->
   <section class="slide slide-role" data-chapter="第三幕 · 四个角色，一张地图" data-no="10">
     <div class="halftone-blob tr"></div>
@@ -3497,69 +4278,84 @@
         <span class="role-chapter">第三幕 · 四个不可替代的角色</span>
       </div>
 
-      <h2 class="role-title">场景<br>共创者</h2>
-      <div class="role-subtitle">Scenario Co-creator</div>
+      <!-- 用户旅程指示器 -->
+      <div class="role-journey anim anim-2">
+        <div class="journey-step">破圈</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">种草</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step">背书</div>
+        <span class="journey-arrow">→</span>
+        <div class="journey-step active">沉淀 · 决定了→持续认同</div>
+      </div>
+
+      <h2 class="role-title">内容持续<br>生产引擎</h2>
+      <div class="role-subtitle">Content Engine</div>
 
       <div class="role-def anim anim-3">
-        让 KOL 用自己的圈子和生活——
-        <span class="role-def-em">把车放进 brief 写不出来的真实场景</span>里。
+        让品牌拥有<strong style="color:var(--ink); font-weight:700;">持续的人设一致性</strong>——
+        <span class="role-def-em">KOL 就是品牌的脸，12 个月以上深度绑定</span>。
+      </div>
+      <div class="role-car-role anim anim-3">
+        <span class="car-label">车的角色</span>品牌人格载体——KOL 是品牌的民间代言人，车与人融为一体
       </div>
 
       <div class="role-grid">
         <div class="role-cell anim anim-4">
           <div class="cell-eyebrow"><span class="cell-no">01</span>选号方向</div>
           <div class="cell-body">
-            <div class="cell-tag">旅行 / 户外</div>
-            <div class="cell-tag">亲子 / 宠物</div>
-            <div class="cell-tag">美食 / 改装</div>
-            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 按"人群的生活"反推</div>
+            <div class="cell-tag">准代言人型 KOL</div>
+            <div class="cell-tag">调性深度匹配</div>
+            <div class="cell-tag">少而精：3-5 人</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 年框 ≥ 12 个月 · 认脸级合作</div>
           </div>
         </div>
         <div class="role-cell anim anim-5">
           <div class="cell-eyebrow"><span class="cell-no">02</span>Brief 怎么写</div>
           <div class="cell-body cell-brief">
-            <div class="cell-cross">"请展示我们车的 A/B/C 功能"</div>
-            <div class="cell-do">"下个月你最想去 / 做的事是什么？带上我们的车"</div>
+            <div class="cell-cross">"本期 Campaign 主推 A/B/C 卖点"</div>
+            <div class="cell-do">"接下来 12 个月，你想跟这台车一起过什么样的生活？"</div>
           </div>
         </div>
         <div class="role-cell anim anim-6">
           <div class="cell-eyebrow"><span class="cell-no">03</span>怎么考核</div>
           <div class="cell-body">
-            <div class="cell-kpi">场景多样性</div>
-            <div class="cell-kpi">自然播放占比</div>
-            <div class="cell-kpi">用户场景认同感</div>
+            <div class="cell-kpi">内容资产沉淀量</div>
+            <div class="cell-kpi">品牌人设一致性</div>
+            <div class="cell-kpi">自然流量贡献占比</div>
           </div>
         </div>
       </div>
 
       <div class="role-footer">
         <div class="role-data anim anim-7">
-          <div class="data-eyebrow">反直觉数据</div>
+          <div class="data-eyebrow">深度绑定的效率回报</div>
           <div class="data-main">
-            跨场景合作自然播放
-            <span class="data-num">78.1%</span>
-            <span class="data-vs">·</span>
-            自然 CPA3
-            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">¥0.64</span>
+            看后搜索成本：深度合作
+            <span class="data-num">¥33</span>
+            <span class="data-vs">vs</span>
+            单次
+            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">¥86</span>
           </div>
           <div class="data-conclusion">
             <span style="color:var(--accent); font-weight:900;">→</span>
-            场景共创获得了
-            <span class="data-mult">天然分发</span>
+            预算集中在验证过的人身上，每一块钱的搜索效率
+            <span class="data-mult">提升 2.6×</span>
           </div>
         </div>
 
         <div class="role-pitfall anim anim-8">
-          <div class="pitfall-title">我们踩过的坑</div>
+          <div class="pitfall-title">品牌提及率随合作加深递增</div>
           <div class="pitfall-text">
-            某次给场景类 KOL 写了详细 brief 要求拍 4 个场景各 30 秒，结果出来的内容全是
-            <span class="pitfall-quote">"展示痕迹"</span>
-            ——场景共创的核心是放手，不是控制。
+            1 条 3.1% → 2 条 4.1% → ≥3 条 5.4%
+            <br><br>
+            <span style="color:var(--ink-mute);font-style:normal;font-size:0.9em;">粉丝反复看到同一个人和同一台车——品牌从「被植入」变成「被讨论」</span>
           </div>
         </div>
       </div>
 
     </div>
+    <div class="provenance">6 品牌 / 2734 条 / 398 位复投达人 / 2025.05-2026.03</div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
@@ -3742,15 +4538,15 @@
       <div class="overview-grid">
         <div class="overview-col anim anim-4">
           <div class="col-num">01</div>
-          <h3 class="col-title">角色<br>对齐会</h3>
+          <h3 class="col-title">角色<br>对齐</h3>
           <div class="col-en">Role Alignment</div>
           <div class="col-def">
-            项目启动<strong>第 1 周必开</strong>——
-            市场 / 销售 / 品牌三方对齐 4 角色。
+            每波 Campaign 前<strong>对照 4 角色拆 brief</strong>——
+            不同角色、不同 brief、不同考核。
           </div>
           <div class="col-data">
-            <div class="col-data-num">1<span class="col-data-suffix">周</span></div>
-            <div class="col-data-label">前期多花 1 周<br>省后续 12 周返工</div>
+            <div class="col-data-num">4<span class="col-data-suffix">份</span></div>
+            <div class="col-data-label">每波 Campaign 产出<br>4 份角色 brief</div>
           </div>
         </div>
 
@@ -3783,15 +4579,15 @@
 
         <div class="overview-col anim anim-7">
           <div class="col-num">04</div>
-          <h3 class="col-title">信任<br>仪表盘</h3>
-          <div class="col-en">L1–L5 Dashboard</div>
+          <h3 class="col-title">效果<br>复盘</h3>
+          <div class="col-en">Performance Review</div>
           <div class="col-def">
-            复盘不看 ROI 报告——
-            <strong>每条投放映射到 L1-L5 中具体某层</strong>。
+            把每条内容放回 L1-L5——
+            <strong>不同角色看不同层</strong>，卡在哪优化哪。
           </div>
           <div class="col-data">
-            <div class="col-data-num">L1-L5</div>
-            <div class="col-data-label">看清楚每个项目<br>真正停在第几层</div>
+            <div class="col-data-num">4×5</div>
+            <div class="col-data-label">4 角色 × L1-L5<br>一张复盘矩阵</div>
           </div>
         </div>
       </div>
@@ -3817,64 +4613,61 @@
         <span class="role-chapter">终幕 · ICC 实操动作</span>
       </div>
 
-      <h2 class="role-title">角色<br>对齐会</h2>
-      <div class="role-subtitle">Role Alignment Session</div>
+      <h2 class="role-title">角色<br>对齐</h2>
+      <div class="role-subtitle">Role Alignment · 策略动作</div>
 
       <div class="role-def anim anim-3">
-        项目启动<strong style="color:var(--ink); font-weight:700;">第 1 周必开</strong>——
-        <span class="role-def-em">市场 / 销售 / 品牌三方负责人到场</span>。
+        每波 Campaign 启动前，<strong style="color:var(--ink); font-weight:700;">对照 4 个角色拆分达人的作用</strong>——<span class="role-def-em">不同角色、不同 brief、不同考核</span>。
       </div>
 
       <div class="role-grid">
         <div class="role-cell anim anim-4">
           <div class="cell-eyebrow"><span class="cell-no">01</span>怎么做</div>
           <div class="cell-body">
-            <div class="cell-tag">2 小时圆桌会议</div>
-            <div class="cell-tag">三方负责人必到</div>
-            <div class="cell-tag">缺席 = 自动认可结果</div>
-            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 没共识，就没 brief</div>
+            <div class="cell-tag">对照 4 角色矩阵</div>
+            <div class="cell-tag">确认本波需要哪几个角色</div>
+            <div class="cell-tag">每个角色分配达人数 / 预算 / KPI</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 不对齐就不写 brief</div>
           </div>
         </div>
         <div class="role-cell anim anim-5">
-          <div class="cell-eyebrow"><span class="cell-no">02</span>用什么工具</div>
+          <div class="cell-eyebrow"><span class="cell-no">02</span>产出物</div>
           <div class="cell-body cell-brief">
-            <div class="cell-cross">"我们要让 KOL 多元化"</div>
-            <div class="cell-do">一张表：4 角色 × 期待 / KPI / 预算 / 达人画像 全填齐</div>
+            <div class="cell-cross">"一份统一 brief 发给所有达人"</div>
+            <div class="cell-do">4 份角色 brief——破圈的 brief ≠ 背书的 brief ≠ 种草的 brief</div>
           </div>
         </div>
         <div class="role-cell anim anim-6">
-          <div class="cell-eyebrow"><span class="cell-no">03</span>最常发现的事</div>
+          <div class="cell-eyebrow"><span class="cell-no">03</span>关键判断</div>
           <div class="cell-body">
-            <div class="cell-kpi">三方"目标"完全不一样</div>
-            <div class="cell-kpi">从来没分这么开过</div>
-            <div class="cell-kpi">90% 项目第一次开就跑题</div>
+            <div class="cell-kpi">这波主攻哪个阶段？</div>
+            <div class="cell-kpi">哪些角色这波要、哪些不要？</div>
+            <div class="cell-kpi">预算怎么在角色间分配？</div>
           </div>
         </div>
       </div>
 
       <div class="role-footer">
         <div class="role-data anim anim-7">
-          <div class="data-eyebrow">价值</div>
+          <div class="data-eyebrow">核心逻辑</div>
           <div class="data-main">
-            前期多花
-            <span class="data-num">1 周</span>
-            ——省后续
-            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">12 周</span>
-            反复返工
+            <span class="data-num" style="font-size:0.5em;">1 份 brief</span>
+            背 3 种期待
+            <span class="data-vs">→</span>
+            必然失败
           </div>
           <div class="data-conclusion">
             <span style="color:var(--accent); font-weight:900;">→</span>
-            一次对齐胜过反复救火
-            <span class="data-mult">12×</span>
+            角色对齐 = 把「一份 brief 背三种期待」的问题
+            <span class="data-mult">从源头解决</span>
           </div>
         </div>
 
         <div class="role-pitfall anim anim-8">
-          <div class="pitfall-title">一个具体瞬间</div>
+          <div class="pitfall-title">一个真实场景</div>
           <div class="pitfall-text">
-            某次项目启动会，三方在"这次的核心目标"那一栏分别填了
-            <span class="pitfall-quote">"品牌资产" / "线索量" / "新车 awareness"</span>
-            ——同一个项目，三个完全不同的答案。
+            某项目 20 个达人用同一份 brief——结果破圈的没破圈，背书的没深度，
+            <span class="pitfall-quote">全部变成了"不痛不痒的软广"</span>。
           </div>
         </div>
       </div>
@@ -3897,63 +4690,65 @@
         <span class="role-chapter">终幕 · ICC 实操动作</span>
       </div>
 
-      <h2 class="role-title">月度生态<br>校准</h2>
-      <div class="role-subtitle">Monthly Ecosystem Sync</div>
+      <h2 class="role-title">月度<br>生态校准</h2>
+      <div class="role-subtitle">Monthly Platform Sync</div>
 
       <div class="role-def anim anim-3">
-        每月扫一遍 <strong style="color:var(--ink); font-weight:700;">4 层土壤的变化</strong>——
-        <span class="role-def-em">benchmark 不是固定值，是每月校准的活值</span>。
+        平台规则每月都在变——<strong style="color:var(--ink); font-weight:700;">上个月的 benchmark 这个月可能已经失效</strong>，<span class="role-def-em">不校准就是用旧地图走新路</span>。
       </div>
 
       <div class="role-grid">
         <div class="role-cell anim anim-4">
-          <div class="cell-eyebrow"><span class="cell-no">01</span>扫什么</div>
+          <div class="cell-eyebrow"><span class="cell-no">01</span>抖音</div>
           <div class="cell-body">
-            <div class="cell-tag">算法政策（平台规则）</div>
-            <div class="cell-tag">注意力总盘（DAU / 时长）</div>
-            <div class="cell-tag">社会情绪（评论区舆情）</div>
-            <div class="cell-tag">监管走向（合规细则）</div>
+            <div class="cell-tag">搜索权重 / 看后搜路径调整</div>
+            <div class="cell-tag">星图商单自然流量分发规则</div>
+            <div class="cell-tag">加热产品（DOU+ / 内容热推）迭代</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 影响自然播放占比、看后搜率</div>
           </div>
         </div>
         <div class="role-cell anim anim-5">
-          <div class="cell-eyebrow"><span class="cell-no">02</span>怎么校准</div>
-          <div class="cell-body cell-brief">
-            <div class="cell-cross">"沿用去年 benchmark"</div>
-            <div class="cell-do">同样看后搜率 0.56%——<br>2025 vs 2026 含义可能完全不一样</div>
+          <div class="cell-eyebrow"><span class="cell-no">02</span>小红书</div>
+          <div class="cell-body">
+            <div class="cell-tag">笔记流量分发算法更新</div>
+            <div class="cell-tag">蒲公英报备 vs 非报备流量差</div>
+            <div class="cell-tag">搜索 SEO 权重变化</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 影响种草效率、内容策略</div>
           </div>
         </div>
         <div class="role-cell anim anim-6">
-          <div class="cell-eyebrow"><span class="cell-no">03</span>真实价值</div>
+          <div class="cell-eyebrow"><span class="cell-no">03</span>视频号</div>
           <div class="cell-body">
-            <div class="cell-kpi">区分项目问题 vs 生态问题</div>
-            <div class="cell-kpi">提前看到趋势变化</div>
-            <div class="cell-kpi">向客户解释清楚波动</div>
+            <div class="cell-tag">推荐算法偏好（社交 vs 兴趣）</div>
+            <div class="cell-tag">互选平台规则 / 商单标记</div>
+            <div class="cell-tag">私域导流路径变化</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 影响信任转化链路</div>
           </div>
         </div>
       </div>
 
       <div class="role-footer">
         <div class="role-data anim anim-7">
-          <div class="data-eyebrow">2 年内同一指标含义反转</div>
+          <div class="data-eyebrow">真实案例</div>
           <div class="data-main">
-            自然播放
+            某品牌自然播放
             <span class="data-num">70%</span>
             <span class="data-vs">→</span>
             <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">35%</span>
           </div>
           <div class="data-conclusion">
             <span style="color:var(--accent); font-weight:900;">→</span>
-            不校准 = 用旧地图走新路
-            <span class="data-mult">必迷路</span>
+            不是内容变差了，是
+            <span class="data-mult">平台规则变了</span>
           </div>
         </div>
 
         <div class="role-pitfall anim anim-8">
-          <div class="pitfall-title">一个真实场景</div>
+          <div class="pitfall-title">不校准的后果</div>
           <div class="pitfall-text">
-            某项目所有指标都达标——但客户销售线索没起来。3 周后才意识到
-            <span class="pitfall-quote">"看后搜路径已被平台改了"</span>
-            ——好指标背后是失效的转化路径。
+            某项目所有指标都达标——但客户线索没起来。3 周后才发现
+            <span class="pitfall-quote">抖音看后搜路径已被改了</span>
+            ——数字漂亮，但转化路径已经失效。
           </div>
         </div>
       </div>
@@ -3980,25 +4775,24 @@
       <div class="role-subtitle">Selection & QC</div>
 
       <div class="role-def anim anim-3">
-        <strong style="color:var(--ink); font-weight:700;">先看 4 角色矩阵的槽位需求</strong>——
-        再选人、再写 brief、<span class="role-def-em">最后过四关独立审稿</span>。
+        ACT 01 定了角色规划，<strong style="color:var(--ink); font-weight:700;">ACT 03 给每个角色槽位找人、写 brief、过审稿</strong>——<span class="role-def-em">策略落到执行的关键一步</span>。
       </div>
 
       <div class="role-grid">
         <div class="role-cell anim anim-4">
-          <div class="cell-eyebrow"><span class="cell-no">01</span>选号 4 维</div>
+          <div class="cell-eyebrow"><span class="cell-no">01</span>按角色选号</div>
           <div class="cell-body">
-            <div class="cell-tag">调性匹配度</div>
-            <div class="cell-tag">内容稳定性</div>
-            <div class="cell-tag">商单表现</div>
-            <div class="cell-tag">粉丝画像吻合</div>
+            <div class="cell-tag">破圈槽位 → 圈层零重叠的大号</div>
+            <div class="cell-tag">种草槽位 → 向往生活方式垂类</div>
+            <div class="cell-tag">背书槽位 → 垂类专家 / 车评人</div>
+            <div class="cell-tag">沉淀槽位 → 调性深度匹配 3-5 人</div>
           </div>
         </div>
         <div class="role-cell anim anim-5">
-          <div class="cell-eyebrow"><span class="cell-no">02</span>跨圈决策树</div>
+          <div class="cell-eyebrow"><span class="cell-no">02</span>按角色写 Brief</div>
           <div class="cell-body cell-brief">
-            <div class="cell-cross">"汽车 brief 找汽车达人"</div>
-            <div class="cell-do">Awareness 阶段 → 跨圈优先<br>Consider 阶段 → 回到垂类深度</div>
+            <div class="cell-cross">"一份 brief 发给所有达人"</div>
+            <div class="cell-do">每个角色的 brief 逻辑不同——<br>破圈要「自然出场」/ 背书要「专业拆解」</div>
           </div>
         </div>
         <div class="role-cell anim anim-6">
@@ -4016,24 +4810,24 @@
         <div class="role-data anim anim-7">
           <div class="data-eyebrow">关键设计</div>
           <div class="data-main">
-            审稿岗
-            <span class="data-num">独立</span>
-            ——
-            <strong>不让策划自己审</strong>
+            审稿岗要理解
+            <span class="data-num">每个达人的目的</span>
+            和
+            <strong>差异化的期待</strong>
           </div>
           <div class="data-conclusion">
             <span style="color:var(--accent); font-weight:900;">→</span>
-            不是流程冗余，是
-            <span class="data-mult">质量底线</span>
+            不同角色 = 不同审稿标准，
+            <span class="data-mult">不能一把尺子量所有人</span>
           </div>
         </div>
 
         <div class="role-pitfall anim anim-8">
           <div class="pitfall-title">最常见的踩坑</div>
           <div class="pitfall-text">
-            策划自审 = 把"是否完成 brief"和"是否品牌可控"两件事放一个人手里——
-            <span class="pitfall-quote">"她爽快地放过了所有红线"</span>
-            ——是组织结构问题，不是个人能力问题。
+            分不清目标不同 = 审稿标准不同——要求跨圈达人说详细的车型产品点，
+            <span class="pitfall-quote">内容太硬、广告感太重</span>
+            ——结果反而丢掉了跨圈的全部意义。
           </div>
         </div>
       </div>
@@ -4056,65 +4850,68 @@
         <span class="role-chapter">终幕 · ICC 实操动作</span>
       </div>
 
-      <h2 class="role-title">L1-L5<br>仪表盘</h2>
-      <div class="role-subtitle">Trust Dashboard</div>
+      <h2 class="role-title">效果<br>复盘</h2>
+      <div class="role-subtitle">Performance Review</div>
 
       <div class="role-def anim anim-3">
-        复盘不用 ROI 报告——
-        <span class="role-def-em">每条 KOL 内容映射到 L1-L5 中具体一层</span>。
+        复盘不是看 ROI 报告——是<strong style="color:var(--ink); font-weight:700;">局部看每个达人停在了第几层，整体看这波 campaign 的漏斗是否健康</strong>，<span class="role-def-em">两个视角缺一不可</span>。
       </div>
 
       <div class="role-grid">
         <div class="role-cell anim anim-4">
-          <div class="cell-eyebrow"><span class="cell-no">01</span>仪表盘 5 层</div>
+          <div class="cell-eyebrow"><span class="cell-no">01</span>局部：按角色对标</div>
           <div class="cell-body">
-            <div class="cell-tag">L1 翻译启动</div>
-            <div class="cell-tag">L2 翻译完成</div>
-            <div class="cell-tag">L3 信任迁移</div>
-            <div class="cell-tag">L4 信任转嫁</div>
-            <div class="cell-tag">L5 信任循环</div>
+            <div class="cell-tag">破圈 → 主看 L1（触达量）</div>
+            <div class="cell-tag">种草 → 主看 L2-L3（搜索 / A3）</div>
+            <div class="cell-tag">背书 → 主看 L3-L4（决策 / 留资）</div>
+            <div class="cell-tag">沉淀 → 主看 L5（复购 / UGC）</div>
+            <div class="cell-tag" style="font-weight:400;color:var(--ink-mute);font-size:0.85em;margin-top:6px;">— 每个达人用自己角色的尺子量</div>
           </div>
         </div>
         <div class="role-cell anim anim-5">
-          <div class="cell-eyebrow"><span class="cell-no">02</span>核心信号</div>
-          <div class="cell-body cell-brief">
-            <div class="cell-cross">单看 ROI / 看后搜</div>
-            <div class="cell-do">追踪 A3→A4 路径上<br>每一层数据信号</div>
+          <div class="cell-eyebrow"><span class="cell-no">02</span>整体：看 campaign 漏斗</div>
+          <div class="cell-body">
+            <div class="cell-tag">L1→L3 转化率：种草效率是否达标</div>
+            <div class="cell-tag">L3→L4 转化率：搜索到留资的承接</div>
+            <div class="cell-tag">4 角色配比：哪层人力过剩 / 缺位</div>
+            <div class="cell-tag">整波 vs 预期：综合达标率</div>
           </div>
         </div>
         <div class="role-cell anim anim-6">
-          <div class="cell-eyebrow"><span class="cell-no">03</span>反直觉发现</div>
+          <div class="cell-eyebrow"><span class="cell-no">03</span>关键认知</div>
           <div class="cell-body">
-            <div class="cell-kpi">A3→销量有 1 个月滞后</div>
-            <div class="cell-kpi">投放当月看不到结果</div>
-            <div class="cell-kpi">效果"看见"在 30 天后</div>
+            <div class="cell-kpi">效果有滞后——A3→销量约 30 天</div>
+            <div class="cell-kpi">投放当月看不到转化是正常的</div>
+            <div class="cell-kpi">局部没问题但整体卡住 = 配比问题</div>
           </div>
         </div>
       </div>
 
       <div class="role-footer">
         <div class="role-data anim anim-7">
-          <div class="data-eyebrow">真实案例</div>
+          <div class="data-eyebrow">核心逻辑</div>
           <div class="data-main">
-            9 月投放
-            <span class="data-num">1069</span>
-            万 → 销量峰值在
-            <span class="data-num" style="color:var(--ink-mute); font-size:0.62em; vertical-align: 0;">10 月</span>
+            局部
+            <span class="data-vs">→</span>
+            每个达人按角色对标
+            <span class="data-vs">｜</span>
+            整体
+            <span class="data-vs">→</span>
+            campaign 漏斗健康度
           </div>
           <div class="data-conclusion">
             <span style="color:var(--accent); font-weight:900;">→</span>
-            投放后
-            <span class="data-mult">30 天</span>
-            才"开花"
+            复盘 = 4 角色 × L1-L5 矩阵
+            <span class="data-mult">+ 整波漏斗审计</span>
           </div>
         </div>
 
         <div class="role-pitfall anim anim-8">
-          <div class="pitfall-title">仪表盘真正的价值</div>
+          <div class="pitfall-title">常见误区</div>
           <div class="pitfall-text">
-            让品牌方看清楚 KOL 投放真正"停在第几层"——
-            <span class="pitfall-quote">"看清卡在哪里"</span>
-            ——比"还能怎么优化"更重要。
+            用同一个 KPI 考核所有角色——破圈达人被考看后搜率，背书达人被考播放量，
+            <span class="pitfall-quote">每个人都"不及格"</span>
+            ——不是达人不行，是尺子拿错了。
           </div>
         </div>
       </div>
@@ -4123,7 +4920,7 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- 屏 N · 终幕升华 · 3 层认知 + 4 个迭代速度                      -->
+  <!-- 屏 22 · 终幕升华 · 3 层认知 + 4 个迭代速度                      -->
   <!-- ════════════════════════════════════════════════════════════ -->
   <section class="slide slide-evolve" data-chapter="终幕升华 · 真正的能力">
     <div class="halftone-blob" style="position:absolute;width:340px;height:340px;border-radius:50%;background-image:radial-gradient(circle,var(--ink) 1px,transparent 1.2px);background-size:6px 6px;opacity:0.1;pointer-events:none;z-index:0;top:-100px;right:-120px;"></div>
@@ -4138,7 +4935,7 @@
       <h2 class="finding-title">地图会过期。<em>能力</em>不会。</h2>
 
       <div class="finding-subtitle anim anim-3">
-        前面 18 屏是我们今天摸到的地图——
+        前面这些是我们今天摸到的地图——
         但 2026 年最稀缺的，不是这张地图本身，是<strong>持续画新地图的能力</strong>。
       </div>
 
@@ -4228,6 +5025,353 @@
 
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 案例弹窗 · 江仁基 × 帕萨特 · 水平时间轴                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="case-modal-overlay" id="modal-jiangRenJi" onclick="if(event.target===this)closeCaseModal('jiangRenJi')">
+  <div class="case-modal">
+    <div class="cm-topbar">
+      <div class="cm-topbar-left">
+        <span class="cm-eyebrow">CASE 01 · 帕萨特 × ICC</span>
+        <span class="cm-title">江仁基 · 陕A帕萨特</span>
+      </div>
+      <button class="case-modal-close" onclick="closeCaseModal('jiangRenJi')">&times;</button>
+    </div>
+
+    <div class="cm-track" id="track-jiangRenJi">
+      <!-- Panel 1 · 概览 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">OVERVIEW</div>
+          <div class="cm-phase-title">偶发热点事件<br>升格为品牌主导车主 IP</div>
+          <div class="cm-phase-body">
+            ICC 2 小时内建联 KOL，24 小时内容上线，从急速响应到官方联动再到长线 IP 化运营。
+          </div>
+          <div class="cm-data-row">
+            <div class="cm-datum">
+              <div class="cm-datum-num">2.3亿+</div>
+              <div class="cm-datum-label">累计总播放</div>
+            </div>
+            <div class="cm-datum">
+              <div class="cm-datum-num">120万+</div>
+              <div class="cm-datum-label">累计总互动</div>
+            </div>
+            <div class="cm-datum">
+              <div class="cm-datum-num">807万+</div>
+              <div class="cm-datum-label">单条最高</div>
+            </div>
+            <div class="cm-datum">
+              <div class="cm-datum-num">2h</div>
+              <div class="cm-datum-label">建联响应</div>
+            </div>
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder cm-img-tall">
+            <div class="cm-img-icon">⊞</div>
+            江仁基 · 人物形象
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2 · Phase 01 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 01 · 2月原点事件</div>
+          <div class="cm-phase-title">敏锐捕捉<br>"陕A帕萨特"原生热度</div>
+          <div class="cm-phase-body">
+            非品牌策划，纯自然流量——车主江仁基的"陕A帕萨特"内容在抖音产生<strong>原生热度</strong>。ICC 在日常监测中发现信号，判断这不是一次性热点，而是<strong>可运营的 IP 素材</strong>。
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            原始热点视频截图
+          </div>
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            热度监测数据
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3 · Phase 02 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 02 · 2h-24h 急速响应</div>
+          <div class="cm-phase-title">2 小时建联 KOL<br>24 小时内容上线</div>
+          <div class="cm-phase-body">
+            热点窗口期极短。ICC 在热度上升期 <strong>2 小时内完成建联</strong>，评估达人调性与品牌契合度，<strong>24 小时内第一条合作内容上线</strong>——完成从"路人车主"到"品牌合作达人"的身份转换。
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder cm-img-tall">
+            <div class="cm-img-icon">⊞</div>
+            首条合作内容截图
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 4 · Phase 03 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 03 · 48h-7天 官方联动</div>
+          <div class="cm-phase-title">官方响应 + 车评解析<br>+ 矩阵二次扩散</div>
+          <div class="cm-phase-body">
+            品牌官方快速响应，<strong>多平台营销号矩阵扩散</strong>：车评博主跟进解析、官方账号联动转发、评论区互动引导——层层递进放大声量，将单点热度转化为<strong>多触点传播势能</strong>。
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            官方联动内容
+          </div>
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            车评博主二次扩散
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 5 · Phase 04 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 04 · IP 化运营</div>
+          <div class="cm-phase-title">从热点到长线 IP<br>冰岛 · 德国 · 纽北赛道</div>
+          <div class="cm-phase-body">
+            不是消耗热点做一条广告，而是<strong>围绕车主真实人设策划系列内容</strong>：#在冰岛遇见陕A车、#德国狼堡保养、#纽北赛道——让江仁基成为帕萨特的"民间代言人"，<strong>持续生产具有国际视野的车主视角内容</strong>。
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            #在冰岛遇见陕A车
+          </div>
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            #纽北赛道
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 6 · Takeaway -->
+      <div class="cm-panel">
+        <div class="cm-panel-text" style="justify-content:center;">
+          <div class="cm-phase-label">TAKEAWAY</div>
+          <div class="cm-phase-title">热点不是等来的<br>是抢来的</div>
+          <div class="cm-takeaway">
+            <strong>热点敏锐度 + 快速执行力 + 事件 IP 化能力</strong>——不仅看到了热点，更接住了泼天富贵。
+            <br><br>
+            ICC 在帕萨特体系内做到了「从 0 到 1 孵化车主 IP」——从偶发热点到 <strong>2.3 亿播放</strong>的长线品牌资产。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cm-nav">
+      <div class="cm-nav-dots" id="dots-jiangRenJi"></div>
+      <div class="cm-nav-hint">← 左右滑动浏览 →</div>
+      <div class="cm-nav-arrows">
+        <button class="cm-arrow" onclick="scrollCmPanel('jiangRenJi',-1)">←</button>
+        <button class="cm-arrow" onclick="scrollCmPanel('jiangRenJi',1)">→</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 案例弹窗 · 大力仑 × 长城炮 · 水平时间轴                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="case-modal-overlay" id="modal-daLiLun" onclick="if(event.target===this)closeCaseModal('daLiLun')">
+  <div class="case-modal">
+    <div class="cm-topbar">
+      <div class="cm-topbar-left">
+        <span class="cm-eyebrow">CASE 02 · 长城汽车</span>
+        <span class="cm-title">大力仑 · 长城炮</span>
+      </div>
+      <button class="case-modal-close" onclick="closeCaseModal('daLiLun')">&times;</button>
+    </div>
+
+    <div class="cm-track" id="track-daLiLun">
+      <!-- Panel 1 · 概览 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">OVERVIEW</div>
+          <div class="cm-phase-title">一声"长城~炮！"<br>意外出圈</div>
+          <div class="cm-phase-body">
+            魔性口音 + 反差萌引发全网跟风模仿。品牌极速跟进——从连夜改名到董事长亲自接见，两年持续运营，将 UGC 流量转化为品牌资产。
+          </div>
+          <div class="cm-data-row">
+            <div class="cm-datum">
+              <div class="cm-datum-num">55亿+</div>
+              <div class="cm-datum-label">话题总播放</div>
+            </div>
+            <div class="cm-datum">
+              <div class="cm-datum-num">450万</div>
+              <div class="cm-datum-label">单条点赞</div>
+            </div>
+            <div class="cm-datum">
+              <div class="cm-datum-num">301万</div>
+              <div class="cm-datum-label">30天涨粉</div>
+            </div>
+            <div class="cm-datum">
+              <div class="cm-datum-num">170亿</div>
+              <div class="cm-datum-label">市值拉动</div>
+            </div>
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder cm-img-tall">
+            <div class="cm-img-icon">⊞</div>
+            大力仑 · 爆款视频截图
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2 · Phase 01 UGC 发酵 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 01 · 2024.03 · UGC 自然发酵</div>
+          <div class="cm-phase-title">一条素人视频<br>引爆全网</div>
+          <div class="cm-phase-body">
+            大力仑骑电驴路过停车场，看到一辆长城炮皮卡，脱口而出"耶，我的梦中情车"，然后魔性喊出<strong>"长城~炮！"</strong>
+            <br><br>
+            全程素颜、表情夸张、语气洗脑。<strong>身高 1.5 米的娇小姑娘 vs 5 米长 2 吨重的硬核皮卡</strong>，反差感拉满。
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            原始视频截图
+          </div>
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            方言版本跟风模仿
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3 · Phase 02 全网爆发 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 02 · 2024.04 · 全网爆发</div>
+          <div class="cm-phase-title">品牌未介入前的<br>自然峰值</div>
+          <div class="cm-phase-body">
+            裂变路径：普通用户点赞 → 汽车博主二创 → 各地方言版本涌现 → <strong>北海舰队、央视军事</strong>用坦克 + 大力仑 BGM 破圈。
+            <br><br>
+            抖音热榜霸榜：4/13 #大力仑长城炮转场 → 4/14 <strong>#不要轻易尝试长城炮 登顶第 1</strong> → 4/15 再上榜。网友计算：<strong>"三个字，每个字价值超 60 亿。"</strong>
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            北海舰队 · 海军版转场
+          </div>
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            央视军事 · 坦克版
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 4 · Phase 03-① 速度 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 03-① · 品牌响应 · 速度</div>
+          <div class="cm-phase-title">黄金 48 小时</div>
+          <div class="cm-phase-body">
+            爆火当晚，官方抖音账号<strong>连夜改名</strong>："没错就叫长城炮，耶~你的梦中情车~"
+            <br><br>
+            热评区直接喊话<strong>"看上哪个炮，随便挑"</strong>，次日发布官方认领视频《这泼天的富贵终于到我们了》（获赞 15.3 万）。
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            官方连夜改名截图
+          </div>
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            热评区互动
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 5 · Phase 03-② 温度 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 03-② · 品牌响应 · 温度</div>
+          <div class="cm-phase-title">真诚高于套路</div>
+          <div class="cm-phase-body">
+            定制版"大力仑炮"交车仪式——<strong>粉色涂装 + 菠菜图案</strong>，价值超 30 万，授予"山海文化共创官"。
+            <br><br>
+            关键转折：2025 年大力仑婉拒魏建军赠车，说<strong>"这个礼物太大了，以后出新车让我摸两把就行"</strong>——"不贪"的反应进一步强化了真实人设。
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder cm-img-tall">
+            <div class="cm-img-icon">⊞</div>
+            定制版"大力仑炮"交车仪式
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 6 · Phase 03-③ 持续 -->
+      <div class="cm-panel">
+        <div class="cm-panel-text">
+          <div class="cm-phase-label">PHASE 03-③ · 品牌响应 · 持续</div>
+          <div class="cm-phase-title">两年不间断</div>
+          <div class="cm-phase-body">
+            <strong>2025.08</strong> 魏建军与大力仑同框，拍河南话教学视频
+            <br><br>
+            <strong>2026.04</strong> 魏建军亲自教大力仑学车（考到驾照后）
+            <br><br>
+            <strong>2026.04</strong> 北京车展C位担任"一日销售总监"，与邓刚互动"打十折"引爆热搜
+            <br><br>
+            两年内持续制造新话题节点，避免热度消退。
+          </div>
+        </div>
+        <div class="cm-panel-visual">
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            魏建军 × 大力仑同框
+          </div>
+          <div class="cm-img-placeholder">
+            <div class="cm-img-icon">⊞</div>
+            北京车展 · 一日销售总监
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 7 · Takeaway -->
+      <div class="cm-panel">
+        <div class="cm-panel-text" style="justify-content:center;">
+          <div class="cm-phase-label">TAKEAWAY</div>
+          <div class="cm-phase-title">最好的 KOL 营销<br>不是策划出来的</div>
+          <div class="cm-takeaway">
+            是<strong>用组织能力接住偶然性</strong>。长城做对了三件事——
+            <br><br>
+            <strong>速度</strong>（48h 内完成官方认领）<br>
+            <strong>温度</strong>（真诚而非套路）<br>
+            <strong>持续</strong>（两年不间断运营）<br>
+            <br>
+            把一个 UGC 瞬间变成了 <strong>170 亿市值</strong>的品牌资产。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cm-nav">
+      <div class="cm-nav-dots" id="dots-daLiLun"></div>
+      <div class="cm-nav-hint">← 左右滑动浏览 →</div>
+      <div class="cm-nav-arrows">
+        <button class="cm-arrow" onclick="scrollCmPanel('daLiLun',-1)">←</button>
+        <button class="cm-arrow" onclick="scrollCmPanel('daLiLun',1)">→</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 (() => {
   const deck = document.getElementById('deck');
@@ -4287,30 +5431,31 @@
     { section: 'ACT I', sectionCn: '第一幕 · 沟通的真相', items: [
       '消费者从来不直接听品牌讲话'
     ]},
-    { section: 'ACT II', sectionCn: '第二幕 · 3 件反直觉的事', items: [
-      'KOL 有没有效，不是品牌单方面决定的',
-      '水面下决定水面上',
-      '一份 brief，三种期待'
+    { section: 'ACT II', sectionCn: '第二幕 · 反直觉与实证', items: [
+      'FINDING 01 · KOL 有没有效，不是品牌单方面决定的',
+      '品牌博弈差距（实证）',
+      'FINDING 02 · 水面下决定水面上',
+      'FINDING 03 · 一份 brief，三种期待'
     ]},
     { section: 'INTERLUDE', sectionCn: '第三幕引子 · KOX 与案例', items: [
       '第三方民主化之后——内容创作者生态全景',
-      '4 个真实案例（占位）'
+      '2 个真实案例（江仁基 / 大力仑）'
     ]},
     { section: 'ACT III', sectionCn: '第三幕 · 四个角色，一张地图', items: [
       '四个不可替代的角色（总览）',
-      'ROLE 01 · 跨圈引爆器',
-      'ROLE 02 · 专业话语权背书器',
-      'ROLE 03 · 内容持续生产引擎',
-      'ROLE 04 · 场景共创者',
+      'ROLE 01 · 跨圈引爆器（破圈）',
+      'ROLE 02 · 场景种草机（种草）',
+      'ROLE 03 · 专业话语权背书器（背书）',
+      'ROLE 04 · 内容持续生产引擎（沉淀）',
       'L1-L5 信任层级',
       '一张完整的地图（生态全景）'
     ]},
     { section: 'ACT IV', sectionCn: '终幕 · ICC 实操', items: [
       '我们是这样落地的（4 动作总览）',
-      'ACT 01 · 角色对齐会',
-      'ACT 02 · 月度生态校准',
-      'ACT 03 · 选号 + 四关审稿',
-      'ACT 04 · L1-L5 信任仪表盘'
+      'ACT 01 · 角色对齐（策略）',
+      'ACT 02 · 月度生态校准（平台）',
+      'ACT 03 · 选号 + 四关审稿（执行）',
+      'ACT 04 · 效果复盘（局部+整体）'
     ]},
     { section: 'EPILOGUE', sectionCn: '升华 · 真正的能力', items: [
       '地图会过期。能力不会。',
@@ -4393,6 +5538,8 @@
     }
     // 目录开着的时候，方向键在目录内导航（暂不实现，先用鼠标点）
     if (tocOpen) return;
+    // 弹窗开着的时候，不翻页
+    if (document.querySelector('.case-modal-overlay.active')) return;
 
     // 翻页
     if (['ArrowDown', 'PageDown', ' ', 'ArrowRight'].includes(e.key)) {
@@ -4404,6 +5551,78 @@
     }
   });
 })();
+
+/* ── 案例弹窗 · 水平时间轴导航 ── */
+
+// 初始化 dot indicators
+function initCmDots(caseId) {
+  const track = document.getElementById('track-' + caseId);
+  const dotsBox = document.getElementById('dots-' + caseId);
+  if (!track || !dotsBox) return;
+  const panels = track.querySelectorAll('.cm-panel');
+  dotsBox.innerHTML = '';
+  panels.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'cm-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => {
+      panels[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    };
+    dotsBox.appendChild(dot);
+  });
+
+  // 监听滚动更新 dots
+  track.addEventListener('scroll', () => {
+    const scrollLeft = track.scrollLeft;
+    const panelW = panels[0].offsetWidth;
+    const idx = Math.round(scrollLeft / panelW);
+    dotsBox.querySelectorAll('.cm-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+  });
+}
+
+function scrollCmPanel(caseId, dir) {
+  const track = document.getElementById('track-' + caseId);
+  if (!track) return;
+  const panels = track.querySelectorAll('.cm-panel');
+  const panelW = panels[0].offsetWidth;
+  const currentIdx = Math.round(track.scrollLeft / panelW);
+  const next = Math.max(0, Math.min(panels.length - 1, currentIdx + dir));
+  panels[next].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function openCaseModal(id) {
+  const overlay = document.getElementById('modal-' + id);
+  if (!overlay) return;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // 重置滚动到第一屏
+  const track = document.getElementById('track-' + id);
+  if (track) track.scrollLeft = 0;
+
+  // 初始化 dots
+  initCmDots(id);
+
+  // ESC 关闭 + 左右箭头导航
+  overlay._keyHandler = (e) => {
+    if (e.key === 'Escape') closeCaseModal(id);
+    if (e.key === 'ArrowRight') { e.preventDefault(); scrollCmPanel(id, 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); scrollCmPanel(id, -1); }
+  };
+  document.addEventListener('keydown', overlay._keyHandler);
+}
+
+function closeCaseModal(id) {
+  const overlay = document.getElementById('modal-' + id);
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+  if (overlay._keyHandler) {
+    document.removeEventListener('keydown', overlay._keyHandler);
+    overlay._keyHandler = null;
+  }
+}
 </script>
 
 </body>
